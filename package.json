@@ -1,0 +1,49 @@
+{
+  "name": "myblog",
+  "version": "1.0.0",
+  "description": "a simple blog demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node tools/start",
+    "watch": "supervisor -w tools,router -- -r babel-register tools/start "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hx2heng/blogDemo.git"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "author": "huangxinzheng,Hx2",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hx2heng/blogDemo/issues"
+  },
+  "homepage": "https://github.com/Hx2heng/blogDemo#readme",
+  "devDependencies": {
+    "babel": "6.23.0",
+    "babel-cli": "6.23.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.23.0",
+    "babel-preset-react": "6.23.0",
+    "babel-preset-stage-0": "6.22.0",
+    "express": "4.14.1"
+  },
+  "dependencies": {
+    "babel-register": "6.23.0",
+    "connect-flash": "0.1.1",
+    "connect-redis": "3.2.0",
+    "ejs": "2.5.6",
+    "express": "4.14.1",
+    "express-session": "1.15.1"
+  },
+  "babel": {
+    "presets": [
+      "react",
+      "stage-0"
+    ],
+    "plugins": [
+      "transform-es2015-modules-commonjs"
+    ]
+  }
+}

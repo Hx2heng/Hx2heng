@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= blog.title %></title>
+    <% for(var i=0; i<styles.length; i++) {%>
+       <link rel="stylesheet" href="/css/<%= styles[i] %>.css">
+    <% } %>
+  </head>
+  <body>
+  <%- include('../components/nav') %>
