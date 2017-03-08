@@ -32,3 +32,27 @@ ejs2.0+的include函数已经支持传参功能。利用这个特性我们可以
 	 <% for(var i=0; i<styles.length; i++) {%>
        <link rel="stylesheet" href="/css/<%= styles[i] %>.css">
     <% } %>
+
+#### 3. server.address().address 获取到IPv6格式的主机地址"::"？
+以为如果计算机默认启用了IPv6，那么 server.address().address 获取到的就是IPv6的地址。如下：
+
+	var express      = require('express');
+	var app          = express();
+	var server = app.listen(3000, function () {
+    	var host = server.address().address;
+    	var port = server.address().port;
+    	console.log('running at http://' + host + ':' + port)
+	});
+	
+	res：'server running at http://:::3000'	
+如果想得到IPv4的主机地址，请显式得给listen传递主机名：
+	
+	var express      = require('express');
+	var app          = express();
+	var server = app.listen(3000,'localhost', function () {
+    	var host = server.address().address;
+    	var port = server.address().port;
+    	console.log('running at http://' + host + ':' + port)
+	});
+	
+	res：'server running at http://127.0.0.1:3000'

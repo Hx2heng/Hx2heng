@@ -8,6 +8,7 @@ import session from 'express-session';
 import connectRedis from 'connect-redis';
 import extend from 'extend';
 import path from 'path';
+import browserSync from 'browser-sync';
 
 let appPro = async ()=>{
 	let app = express();
@@ -44,7 +45,10 @@ let appPro = async ()=>{
 
 	//启动路由
 	router(app);
-
+	
+	return new Promise(resolve=>resolve())
 }
-
-appPro();
+if(!process.argv[1].includes('dev')){
+	appPro();
+}
+export default appPro
