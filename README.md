@@ -5,6 +5,7 @@
 - Express
 - Babel for ES6
 - ejs
+- browser-sync
 
 ## 问题&解决
 #### 1. supervisor 监听 es6 文件

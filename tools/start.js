@@ -29,7 +29,7 @@ let appPro = async ()=>{
 	//使用flash中间件用来显示通知
 	app.use(flash());
 
-	// 设置静态文件目录 访问通过 [host]/public/...
+	// 设置静态文件目录 访问通过 [host]/...
 	app.use(express.static(path.join(__dirname, '../public')));
 
 	//设置网站常量 render优先级:res.render 传入的对象> res.locals 对象 > app.locals 对象
@@ -46,8 +46,9 @@ let appPro = async ()=>{
 	//启动路由
 	router(app);
 	
-	return new Promise(resolve=>resolve())
+	return new Promise(resolve=>resolve(app))
 }
+//如果是开发模式 不直接执行
 if(!process.argv[1].includes('dev')){
 	appPro();
 }

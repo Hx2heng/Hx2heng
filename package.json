@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "babel-node tools/start",
-    "dev": "supervisor -w tools,router -- -r babel-register tools/dev"
+    "dev": "supervisor -w tools,router,middlewares,config,views -- -r babel-register tools/dev"
   },
   "repository": {
     "type": "git",
@@ -24,11 +24,21 @@
   "devDependencies": {
     "babel": "6.23.0",
     "babel-cli": "6.23.0",
+    "babel-core": "6.23.1",
+    "babel-loader": "6.4.0",
     "babel-plugin-transform-es2015-modules-commonjs": "6.23.0",
+    "babel-preset-env": "1.2.1",
     "babel-preset-react": "6.23.0",
     "babel-preset-stage-0": "6.22.0",
     "browser-sync": "2.18.8",
-    "express": "4.14.1"
+    "css-loader": "0.27.0",
+    "express": "4.14.1",
+    "file-loader": "0.10.1",
+    "glob": "7.1.1",
+    "style-loader": "0.13.2",
+    "url-loader": "0.5.8",
+    "webpack": "2.2.1",
+    "webpack-middleware": "1.5.1"
   },
   "dependencies": {
     "babel-register": "6.23.0",
@@ -36,9 +46,7 @@
     "connect-redis": "3.2.0",
     "ejs": "2.5.6",
     "express": "4.14.1",
-    "express-session": "1.15.1",
-    "ipaddr": "0.0.9",
-    "ipaddr.js": "1.2.0"
+    "express-session": "1.15.1"
   },
   "babel": {
     "presets": [
