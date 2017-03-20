@@ -1,5 +1,8 @@
-import '../css/index.scss'
+import 'bootstrap-loader';
+import '../css/index.scss';
+import '../css/global.css';
 
-window.onload = ()=>{
-	document.getElementsByTagName('p')[0].innerHTML="INDEX"
+window.onload = () => {
+    $('p').eq(0).html("INDEX!!");
+    console.log('fuck')
 }
