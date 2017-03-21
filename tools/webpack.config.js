@@ -1,24 +1,25 @@
 import getPaths from './lib/getPaths.js'
 import path from 'path'
 import webpack from 'webpack'
+import autoprefixer from 'autoprefixer'
+import extend from 'extend'
 
 let config = {
+    context: path.resolve(__dirname, '../public/js'),
     entry: {
-        index: path.resolve(__dirname, '../public/js/index.js'),
-        test: path.resolve(__dirname, '../public/js/test.js'),
+        index: [`bootstrap-loader/lib/bootstrap.loader?configFilePath=${__dirname}/.bootstraprc!bootstrap-loader/no-op.js`, './index.js'],
+        test: './test.js',
     },
     node: {
         fs: 'empty'
     },
     output: {
-        path: path.resolve(__dirname, '../bulid/public/'),
+        path: '/',
         publicPath: '/js/',
         filename: '[name].bundle.js'
     },
     resolve: {
-        modules: [path.resolve(__dirname, "../public"), "../node_modules"],
         extensions: ['*', '.js']
-
     },
     module: {
         rules: [{
@@ -45,8 +46,20 @@ let config = {
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery"
+        }),
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                postcss: function() {
+                    return [autoprefixer];
+                }
+
+            }
         })
     ]
 }
 
-export default config
+const devConfig = extend(true, {}, config, {
+    devtool: 'cheap-module-eval-source-map',
+})
+
+export default [devConfig];
