@@ -1,5 +1,6 @@
-import '../css/index.scss'
+import '../css/global.css';
+import '../css/index.scss';
 
-window.onload = ()=>{
-	document.getElementsByTagName('p')[0].innerHTML="INDEX"
+window.onload = () => {
+
 }

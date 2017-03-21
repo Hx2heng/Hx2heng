@@ -10,46 +10,46 @@ import extend from 'extend';
 import path from 'path';
 import browserSync from 'browser-sync';
 
-let appPro = async ()=>{
-	let app = express();
- 
-	// 设置模板目录
-	app.set('views', path.join(__dirname, '../views'));
-	// 设置模板引擎为 ejs
-	app.set('view engine', 'ejs');
+let appPro = async() => {
+        let app = express();
 
-	//启动服务 
-	await runServer(app);
- 
-	//设置session,将session存在 Redis 中
-	var RedisStore = connectRedis(session);
-	let rs = new RedisStore();
-	app.use(session(extend(true,{},serverCfg.session,rs)));
+        // 设置模板目录
+        app.set('views', path.join(__dirname, '../views'));
+        // 设置模板引擎为 ejs
+        app.set('view engine', 'ejs');
 
-	//使用flash中间件用来显示通知
-	app.use(flash());
+        //启动服务 
+        await runServer(app);
 
-	// 设置静态文件目录 访问通过 [host]/...
-	app.use(express.static(path.join(__dirname, '../public')));
+        //设置session,将session存在 Redis 中
+        var RedisStore = connectRedis(session);
+        let rs = new RedisStore();
+        app.use(session(extend(true, {}, serverCfg.session, rs)));
 
-	//设置网站常量 render优先级:res.render 传入的对象> res.locals 对象 > app.locals 对象
-	app.locals.blog = {
-	  title: websideCfg.title,
-	  description: websideCfg.description
-	};
-	// 添加模板变量
-	app.use(function (req, res, next) {
-	  res.locals.error = req.flash('error').toString();
-	  next();
-	});
+        //使用flash中间件用来显示通知
+        app.use(flash());
 
-	//启动路由
-	router(app);
-	
-	return new Promise(resolve=>resolve(app))
-}
-//如果是开发模式 不直接执行
-if(!process.argv[1].includes('dev')){
-	appPro();
+        // 设置静态文件目录 访问通过 [host]/...
+        app.use(express.static(path.join(__dirname, '../public')));
+
+        //设置网站常量 render优先级:res.render 传入的对象> res.locals 对象 > app.locals 对象
+        app.locals.blog = {
+            title: websideCfg.title,
+            description: websideCfg.description
+        };
+        // 添加模板变量
+        app.use(function(req, res, next) {
+            res.locals.error = req.flash('error').toString();
+            next();
+        });
+
+        //启动路由
+        router(app);
+
+        return new Promise(resolve => resolve(app))
+    }
+    //如果是开发模式 不直接执行
+if (process.env.NODE_ENV === 'production') {
+    appPro();
 }
 export default appPro
