@@ -1,14 +1,17 @@
 import index from './index.js'
 import test from './test.js'
 import posts from './posts.js'
-let router = (app)=>{
+import about from './about.js'
 
-	app.use('/',index)
+let router = (app) => {
 
-	app.use('/test',test)
+    app.use('/', index)
 
-	app.use('/posts',posts)
-	
+    app.use('/test', test)
+
+    app.use('/about', about)
+
+    app.use('/posts', posts)
 }
 
 export default router

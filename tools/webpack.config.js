@@ -4,10 +4,12 @@ import webpack from 'webpack'
 import autoprefixer from 'autoprefixer'
 import extend from 'extend'
 
+const bootstrapLoader = `bootstrap-loader/lib/bootstrap.loader?configFilePath=${__dirname}/.bootstraprc!bootstrap-loader/no-op.js`;
 let config = {
     context: path.resolve(__dirname, '../public/js'),
     entry: {
-        index: [`bootstrap-loader/lib/bootstrap.loader?configFilePath=${__dirname}/.bootstraprc!bootstrap-loader/no-op.js`, './index.js'],
+        index: [bootstrapLoader, './index.js'],
+        content: [bootstrapLoader, './content.js'],
         test: './test.js',
     },
     node: {
