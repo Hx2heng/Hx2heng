@@ -6,7 +6,7 @@ let router = express.Router();
 
 router.get('/', (req, res) => {
     res.render('content', {
-        content: marked('`222`')
+        content: marked('`hxz`')
     });
 })
 export default router

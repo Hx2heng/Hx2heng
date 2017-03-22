@@ -22,7 +22,7 @@ let devPro = async() => {
                 //启动 browser-sync
                 bs = browserSync.create();
                 bs.init({
-                    files: path.resolve(__dirname, '../public/*/**'), //监听目录
+                    files: [path.resolve(__dirname, '../public/*/**'),path.resolve(__dirname, '../views/**/*.ejs')], //监听目录
                     proxy: {
                         target: serverCfg.host + ':' + serverCfg.port,
                         middleware: [wpdm]

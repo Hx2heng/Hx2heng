@@ -1,5 +1,5 @@
 import glob from 'glob'
-let getPaths = (globPath, pathDir)=> {
+let getPaths = (globPath, pathDir) => {
     var files = glob.sync(globPath);
     var entries = {},
         entry, dirname, basename, pathname, extname;

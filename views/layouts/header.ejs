@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title><%= blog.title %></title>
-    <% for(var i=0; i<styles.length; i++) {%>
-       <link rel="stylesheet" href="/css/<%= styles[i] %>.css">
+    <link rel="stylesheet" href="css/<%= styles[0] %>.bundle.css">
+    <% for(var i=1; i<styles.length-1; i++) {%>
+       <link rel="stylesheet" href="css/<%= styles[i] %>.css">
     <% } %>
   </head>
   <body>
