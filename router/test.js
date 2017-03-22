@@ -1,6 +1,6 @@
 import express from 'express'
-import testMiddlewares from '../middlewares/test.js'
-import { checkLogin, checkNotLogin } from '../middlewares/check.js'
+import testMiddlewares from './middlewares/test.js'
+import { checkLogin, checkNotLogin } from './middlewares/check.js'
 import Mongolass from 'mongolass'
 let router = express.Router();
 

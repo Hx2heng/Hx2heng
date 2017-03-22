@@ -1,6 +1,6 @@
-import {makeDir,cleanDir,copyDir} from './lib/fs.js'
+import { makeDir, cleanDir, copyDir } from './lib/fs.js'
 
-const build = async()=>{
+const build = async() => {
     await makeDir('build');
     await cleanDir('build');
 }

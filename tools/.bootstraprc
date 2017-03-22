@@ -66,7 +66,7 @@ styles:
   # Reset and dependencies
   normalize: true
   print: true
-  glyphicons: false
+  glyphicons: true
 
   # Core CSS
   scaffolding: true
@@ -112,15 +112,15 @@ styles:
 
 ### Bootstrap scripts
 scripts:
-  transition: false
-  alert: false
-  button: false
-  carousel: false
-  collapse: false
-  dropdown: false
-  modal: false
-  tooltip: false
-  popover: false
-  scrollspy: false
-  tab: false
-  affix: false
+  transition: true
+  alert: true
+  button: true
+  carousel: true
+  collapse: true
+  dropdown: true
+  modal: true
+  tooltip: true
+  popover: true
+  scrollspy: true
+  tab: true
+  affix: true

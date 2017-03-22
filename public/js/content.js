@@ -1,5 +1,5 @@
 import '../css/markdown/markdown.css';
-import '../css/index.scss';
+import '../css/global.scss';
 
 window.onload = () => {
 

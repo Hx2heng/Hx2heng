@@ -1,6 +1,6 @@
-import '../css/global.css';
+import '../css/global.scss';
 import '../css/index.scss';
 
 window.onload = () => {
-    console.log(3);
+
 }
