@@ -56,8 +56,8 @@ let config = {
                 use: 'url-loader?limit=10000',
             },
             {
-                test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
-                use: 'file-loader',
+                test: /\.(ttf|eot|svg|jpg|png|gif)(\?[\s\S]+)?$/,
+                use: 'file-loader?name=[path][name].[ext]',
             }
         ]
     },
@@ -69,12 +69,12 @@ let config = {
         new webpack.LoaderOptionsPlugin({
             options: {
                 postcss: function() {
-                    return [cssnano,autoprefixer];
+                    return [cssnano, autoprefixer];
                 }
 
             }
         }),
-        new ExtractTextPlugin({filename:'css/[name].bundle.css?[hash]-[chunkhash]-[contenthash]-[name]'})
+        new ExtractTextPlugin({ filename: 'css/[name].bundle.css?[hash]-[chunkhash]-[contenthash]-[name]' })
     ]
 }
 

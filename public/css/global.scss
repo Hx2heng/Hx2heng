@@ -1,0 +1,12 @@
+$gray:#eee;
+$white:#fff;
+body {
+    background-color: $gray
+}
+
+.main {
+    padding-top: 50px;
+    .content {
+        background-color: $white
+    }
+}
