@@ -1,10 +1,13 @@
 <%- include('layouts/header',{styles:['index']}) %>
 
-
-    <div class="col-md-12">
-    <div class="test"></div>
-        <img src="images/logo.png" alt="logo" class="img-circle">
-        <button type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span>（危险）Danger!</button>
+ <%- include('./components/banner') %>
+    <div class="col-md-10 col-md-offset-1 content">
+         <div class="col-md-8">
+            <%- include('./components/artList') %>
+         </div>
+         <div class="col-md-2">
+            <%- include('./components/infoSide') %>
+         </div>
     </div>
 
 

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "set NODE_ENV='production' && babel-node tools/start",
-    "dev": "supervisor -w tools,router,middlewares,config -- -r babel-register tools/dev",
+    "dev": "supervisor -w tools,router,config -- -r babel-register tools/dev",
     "build":"babel-node tools/build"
   },
   "repository": {
@@ -64,7 +64,6 @@
   },
   "babel": {
     "presets": [
-      "react",
       "stage-0"
     ],
     "plugins": [

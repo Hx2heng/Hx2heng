@@ -1,4 +1,4 @@
-import '../css/markdown/markdown.css';
+import '../css/lib/markdown/markdown.css';
 import '../css/global.scss';
 
 window.onload = () => {

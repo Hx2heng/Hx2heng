@@ -8,10 +8,12 @@ router.get('/', (req, res) => {
     fs.readFile('public/content/about.md', (err, data) => {
         if (err) {
             res.render('content', {
+                title:'关于-WebDemo',
                 content: marked('`err`')
             });
         } else {
             res.render('content', {
+                title:'关于-WebDemo',
                 content: marked(data.toString())
             });
         }

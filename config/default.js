@@ -9,7 +9,82 @@ let config = {
             maxAge: 1000 * 60 * 60 * 24 // 过期时间，过期后 cookie 中的 session id 自动删除
         }
     },
-    mongodb: 'mongodb://localhost:27017//blogDemo'
+    mongodb: 'mongodb://localhost:27017//blogDemo',
+    // 测试用数据
+    testData:[
+        {
+            id:'1',
+            title:'文章标题',
+            description:'我欲乘风归去，又恐琼楼玉宇，高处不胜寒，起舞弄清影，何似在人间。',
+            preImage:'logo.png'
+        },
+        {
+            id:'2',
+            title:'文章标题',
+            description:'我欲乘风归去，又恐琼楼玉宇，高处不胜寒，起舞弄清影，何似在人间。',
+            preImage:'logo.png'
+        },
+        {
+            id:'3',
+            title:'文章标题',
+            description:'我欲乘风归去，又恐琼楼玉宇，高处不胜寒，起舞弄清影，何似在人间。',
+            preImage:'logo.png'
+        },
+        {
+            id:'4',
+            title:'文章标题',
+            description:'我欲乘风归去，又恐琼楼玉宇，高处不胜寒，起舞弄清影，何似在人间。',
+            preImage:'logo.png'
+        },
+        {
+            id:'5',
+            title:'文章标题',
+            description:'我欲乘风归去，又恐琼楼玉宇，高处不胜寒，起舞弄清影，何似在人间。',
+            preImage:'logo.png'
+        },
+        {
+            id:'6',
+            title:'文章标题',
+            description:'我欲乘风归去，又恐琼楼玉宇，高处不胜寒，起舞弄清影，何似在人间。',
+            preImage:'logo.png'
+        },
+        {
+            id:'7',
+            title:'文章标题',
+            description:'我欲乘风归去，又恐琼楼玉宇，高处不胜寒，起舞弄清影，何似在人间。',
+            preImage:'logo.png'
+        },
+        {
+            id:'8',
+            title:'文章标题',
+            description:'我欲乘风归去，又恐琼楼玉宇，高处不胜寒，起舞弄清影，何似在人间。',
+            preImage:'logo.png'
+        },
+        {
+            id:'9',
+            title:'文章标题',
+            description:'我欲乘风归去，又恐琼楼玉宇，高处不胜寒，起舞弄清影，何似在人间。',
+            preImage:'logo.png'
+        },
+        {
+            id:'10',
+            title:'文章标题',
+            description:'我欲乘风归去，又恐琼楼玉宇，高处不胜寒，起舞弄清影，何似在人间。',
+            preImage:'logo.png'
+        },
+        {
+            id:'11',
+            title:'文章标题',
+            description:'我欲乘风归去，又恐琼楼玉宇，高处不胜寒，起舞弄清影，何似在人间。',
+            preImage:'logo.png'
+        },
+        {
+            id:'12',
+            title:'文章标题',
+            description:'我欲乘风归去，又恐琼楼玉宇，高处不胜寒，起舞弄清影，何似在人间。',
+            preImage:'logo.png'
+        }
+    ]
 }
 
 export default config

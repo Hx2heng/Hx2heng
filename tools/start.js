@@ -35,8 +35,9 @@ let appPro = async() => {
         //设置网站常量 render优先级:res.render 传入的对象> res.locals 对象 > app.locals 对象
         app.locals.blog = {
             title: websideCfg.title,
-            description: websideCfg.description
+            description: websideCfg.description,
         };
+        global.testData = serverCfg.testData;
         // 添加模板变量
         app.use(function(req, res, next) {
             res.locals.error = req.flash('error').toString();

@@ -1,12 +1,40 @@
-$gray:#eee;
-$white:#fff;
+// bgcolor
+$bgColor:#eee;
+$ctBgColor:#fff;
+//font
+$ftLinght:#fff;
+//border
+$borderDirection:top !default;
+
+html,body{
+    min-height:100%;
+}
+html{
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
 body {
-    background-color: $gray
+    background-color: $bgColor;
 }
 
 .main {
     padding-top: 50px;
+    min-height: 100%;
     .content {
-        background-color: $white
+        background-color: $ctBgColor;
+        padding:10px
     }
+}
+
+.jumbotron{
+    background-color:#33363d;
+    color:$ftLinght;
+    margin:0;
+}
+
+footer{
+    width: 100%;
+    height:20px;
+     background-color:#33363d;
+     margin-top:40px;
 }
