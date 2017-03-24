@@ -8,7 +8,6 @@ import session from 'express-session';
 import connectRedis from 'connect-redis';
 import extend from 'extend';
 import path from 'path';
-import browserSync from 'browser-sync';
 
 let appPro = async() => {
         let app = express();
