@@ -6,6 +6,8 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackCfgs from './webpack.config.js'
 import path from 'path'
 
+
+
 let devPro = async() => {
     let app, bs;
     await new Promise(resolve => {

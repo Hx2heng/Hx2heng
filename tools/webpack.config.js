@@ -6,24 +6,18 @@ import extend from 'extend'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import cssnano from 'cssnano'
 
+const isDebug = process.argv[1].endsWith('dev');
+
 const bootstrapLoader = `bootstrap-loader/lib/bootstrap.loader?configFilePath=${__dirname}/.bootstraprc!bootstrap-loader/no-op.js`;
-
-
-
 let config = {
-    context: path.resolve(__dirname, '../public/js'),
+   context: path.resolve(__dirname, '../public/js'),
     entry: {
-        index: [bootstrapLoader, './index.js'],
-        content: [bootstrapLoader, './content.js'],
+        index: [ bootstrapLoader,'./index.js'],
+        content: [ bootstrapLoader,'./content.js'],
         test: './test.js',
     },
     node: {
         fs: 'empty'
-    },
-    output: {
-        path: '/',
-        publicPath: '/',
-        filename: 'js/[name].bundle.js'
     },
     resolve: {
         extensions: ['*', '.js']
@@ -31,7 +25,7 @@ let config = {
     module: {
         rules: [{
                 test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: /(node_modules)/,
                 loader: 'babel-loader',
                 query: {
                     presets: ['env']
@@ -52,15 +46,20 @@ let config = {
                 })
             },
             {
-                test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                use: 'url-loader?limit=10000',
-            },
+        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+        loader: 'url-loader',
+        query: {
+          name: isDebug?'images/[name].[ext]?[hash]':'images/[hash].[ext]',
+          limit: isDebug?1:10000,
+        },
+      },
             {
-                test: /\.(ttf|eot|svg|jpg|png|gif)(\?[\s\S]+)?$/,
-                use: 'file-loader?name=[path][name].[ext]',
+               test: /\.(eot|ttf|wav|mp3)$/, 
+                use: isDebug?'file-loader?name=media/[name].[ext]?[hash]':'file-loader?name=media/[hash].[ext]',
             }
         ]
     },
+    devtool: isDebug?'cheap-module-eval-source-map':'',
     plugins: [
         new webpack.ProvidePlugin({
             $: "jquery",
@@ -69,17 +68,37 @@ let config = {
         new webpack.LoaderOptionsPlugin({
             options: {
                 postcss: function() {
-                    return [cssnano, autoprefixer];
+                    return isDebug?[autoprefixer]:[cssnano, autoprefixer];
                 }
 
             }
         }),
-        new ExtractTextPlugin({ filename: 'css/[name].bundle.css?[hash]-[chunkhash]-[contenthash]-[name]' })
+        new ExtractTextPlugin({ filename: isDebug?'css/[name].bundle.css':'css/[name].bundle.css?[hash]-[chunkhash]-[contenthash]-[name]' })
     ]
 }
 
 const devConfig = extend(true, {}, config, {
-    devtool: 'cheap-module-eval-source-map',
+    output: {
+        path: '/',
+        publicPath: '/',
+        filename: 'js/[name].bundle.js'
+    }
+    
 })
 
-export default [devConfig];
+const bulidConfig = extend(true, {}, config, {
+     
+    output: {
+        path: path.resolve(__dirname, '../build/public'),
+        filename: 'js/[name].bundle.js'
+    },
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+    compress: {
+        warnings: false
+    }
+})
+    ]
+    
+})
+export default [devConfig,bulidConfig];
