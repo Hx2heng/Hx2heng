@@ -11,4 +11,20 @@ router.get('/', (req, res) => {
         content : marked(data[req.query.id].description.toString())
     })
 })
+router.get('/docs', (req, res) => {
+    let content = req.query.content;
+    fs.readFile('public/content/'+content+'.md', (err, data) => {
+        if (err) {
+            res.render('content', {
+                title:content,
+                content: marked('`err`')
+            });
+        } else {
+            res.render('content', {
+                title:content,
+                content: marked(data.toString())
+            });
+        }
+    })
+})
 export default router

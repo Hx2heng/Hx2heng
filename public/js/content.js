@@ -1,6 +1,6 @@
-import '../css/lib/markdown/markdown.css';
-import '../css/global.scss';
 
+import '../css/content.scss';
+import './components/nav';
 window.onload = () => {
-    console.log('content page')
+    console.log('content')
 }

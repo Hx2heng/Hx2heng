@@ -1,6 +1,6 @@
 let config = {
-	title:'Blog Demo',
-	description:'a simple blog demo'
+	title:'Web Demo',
+	description:'a simple Web demo'
 }
 
 export default config
