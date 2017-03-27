@@ -46,7 +46,7 @@ const build = async() => {
         });
         gulp.start(() => {
             console.log('gulp done!');
-            resolve();
+            return resolve();
         });
 
     })

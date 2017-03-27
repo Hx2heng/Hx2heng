@@ -60,6 +60,11 @@ let config = {
         ]
     },
     devtool: isDebug ? 'cheap-module-eval-source-map' : 'cheap-module-eval-source-map',
+    stats:{
+        assets: true,
+         cached: false,
+         chunks: false,
+    },
     plugins: [
         new webpack.ProvidePlugin({
             $: "jquery",
