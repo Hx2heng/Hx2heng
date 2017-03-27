@@ -39,7 +39,7 @@
                     this.timer = setInterval(function() {
                         var time = new Date().getTime() / 640;
                         _this.animateBubble(time);
-                    }, 20)
+                    }, 10)
                 }
                 this.ctx.clearRect(0, 0, this.c_w, this.c_h);
                 this.canvas.css('display', 'block');
