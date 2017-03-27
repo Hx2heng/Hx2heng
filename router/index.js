@@ -1,5 +1,4 @@
 import express from 'express'
-
 let router = express.Router();
 
 router.use((req, res, next) => {
@@ -7,6 +6,6 @@ router.use((req, res, next) => {
 })
 router.get('/', (req, res) => {
     let data = global.testData;
-    res.render('index', { title: 'web demo', articles: data });
+    res.render('index', { articles: data });
 })
 export default router
