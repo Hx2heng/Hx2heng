@@ -52,14 +52,12 @@ const build = async() => {
     })
 
     await new Promise((resolve, reject) => {
-        webpack(webpackCfgs[1], () => {
-            console.log('webpack done!');
-            return resolve();
-        }).run((err, stats) => {
+        webpack(webpackCfgs[1]).run((err, stats) => {
             if (err) {
                 return reject(err);
             }
-            console.log(stats.toString(webpackCfgs[1].stats));
+            console.log('webpack done!',stats.toString(webpackCfgs[1].stats));
+            return resolve();
         });
     });
 
