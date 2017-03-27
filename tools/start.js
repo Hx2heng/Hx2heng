@@ -49,7 +49,7 @@ let appPro = async() => {
         return new Promise(resolve => resolve(app))
     }
     //如果是开发模式 不直接执行
-if (process.env.NODE_ENV === 'production') {
+if (!process.argv[1].endsWith('dev')) {
     appPro();
 }
 export default appPro

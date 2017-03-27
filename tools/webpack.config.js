@@ -10,10 +10,10 @@ const isDebug = process.argv[1].endsWith('dev');
 
 const bootstrapLoader = `bootstrap-loader/lib/bootstrap.loader?configFilePath=${__dirname}/.bootstraprc!bootstrap-loader/no-op.js`;
 let config = {
-   context: path.resolve(__dirname, '../public/js'),
+    context: path.resolve(__dirname, '../public/js'),
     entry: {
-        index: [ bootstrapLoader,'./index.js'],
-        content: [ bootstrapLoader,'./content.js'],
+        index: [bootstrapLoader, './index.js'],
+        content: [bootstrapLoader, './content.js'],
         test: './test.js',
     },
     node: {
@@ -42,24 +42,24 @@ let config = {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
-                    use: ['css-loader', 'postcss-loader', 'sass-loader']
+                    use: ['css-loader', 'postcss-loader']
                 })
             },
             {
-        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-        loader: 'url-loader',
-        query: {
-          name: isDebug?'images/[name].[ext]?[hash]':'images/[hash].[ext]',
-          limit: isDebug?1:10000,
-        },
-      },
+                test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+                loader: 'url-loader',
+                query: {
+                    name: isDebug ? 'images/[name].[ext]?[hash]' : 'images/[hash].[ext]',
+                    limit: isDebug ? 1 : 2017,
+                },
+            },
             {
-               test: /\.(eot|ttf|wav|mp3)$/, 
-                use: isDebug?'file-loader?name=media/[name].[ext]?[hash]':'file-loader?name=media/[hash].[ext]',
+                test: /\.(eot|ttf|wav|mp3)$/,
+                use: isDebug ? 'file-loader?name=media/[name].[ext]?[hash]' : 'file-loader?name=media/[hash].[ext]',
             }
         ]
     },
-    devtool: isDebug?'cheap-module-eval-source-map':'',
+    devtool: isDebug ? 'cheap-module-eval-source-map' : 'cheap-module-eval-source-map',
     plugins: [
         new webpack.ProvidePlugin({
             $: "jquery",
@@ -68,12 +68,17 @@ let config = {
         new webpack.LoaderOptionsPlugin({
             options: {
                 postcss: function() {
-                    return isDebug?[autoprefixer]:[cssnano, autoprefixer];
+                    return isDebug ? [autoprefixer] : [cssnano, autoprefixer];
                 }
 
             }
         }),
-        new ExtractTextPlugin({ filename: isDebug?'css/[name].bundle.css':'css/[name].bundle.css?[hash]-[chunkhash]-[contenthash]-[name]' })
+        new ExtractTextPlugin({ filename: isDebug ? 'css/[name].bundle.css' : 'css/[name].bundle.css?[hash]-[chunkhash]-[contenthash]-[name]' }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: isDebug ? true : false
+            }
+        })
     ]
 }
 
@@ -83,22 +88,16 @@ const devConfig = extend(true, {}, config, {
         publicPath: '/',
         filename: 'js/[name].bundle.js'
     }
-    
+
 })
 
-const bulidConfig = extend(true, {}, config, {
-     
+const buildConfig = extend(true, {}, config, {
+
     output: {
         path: path.resolve(__dirname, '../build/public'),
+        publicPath: '/',
         filename: 'js/[name].bundle.js'
-    },
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin({
-    compress: {
-        warnings: false
     }
+
 })
-    ]
-    
-})
-export default [devConfig,bulidConfig];
+export default [devConfig, buildConfig];
