@@ -1,4 +1,3 @@
-
 import '../css/content.scss';
 import './components/nav';
 window.onload = () => {

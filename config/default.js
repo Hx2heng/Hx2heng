@@ -9,7 +9,7 @@ let config = {
             maxAge: 1000 * 60 * 60 * 24 // 过期时间，过期后 cookie 中的 session id 自动删除
         }
     },
-    mongodb: 'mongodb://localhost:27017//blogDemo',
+    mongodb: 'mongodb://localhost:27017/myblog',
     // 测试用数据
     testData: [{
             id: '1',

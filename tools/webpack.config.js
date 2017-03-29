@@ -14,7 +14,7 @@ let config = {
     entry: {
         index: [bootstrapLoader, './index.js'],
         content: [bootstrapLoader, './content.js'],
-        test: './test.js',
+        admin: [bootstrapLoader, './admin.js'],
     },
     node: {
         fs: 'empty'
@@ -60,10 +60,10 @@ let config = {
         ]
     },
     devtool: isDebug ? 'cheap-module-eval-source-map' : 'cheap-module-eval-source-map',
-    stats:{
+    stats: {
         assets: true,
-         cached: false,
-         chunks: false,
+        cached: false,
+        chunks: false,
     },
     plugins: [
         new webpack.ProvidePlugin({

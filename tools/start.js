@@ -8,6 +8,9 @@ import session from 'express-session';
 import connectRedis from 'connect-redis';
 import extend from 'extend';
 import path from 'path';
+import bodyParser from 'body-parser';
+import multer from 'multer';
+
 
 let appPro = async() => {
         let app = express();
@@ -43,6 +46,9 @@ let appPro = async() => {
             next();
         });
 
+        app.use(bodyParser.json()); // for parsing application/json
+        app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+        //app.use(multer()); // for parsing multipart/form-data
         //启动路由
         router(app);
 

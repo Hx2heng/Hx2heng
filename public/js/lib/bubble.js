@@ -26,8 +26,7 @@
                     this.canvas.css({
                         'position': 'absolute',
                         'top': 0,
-                        'left': 0,
-                        'opacity': .6
+                        'left': 0
                     })
                     this.c_w = this.cfg.width ? this.cfg.width : $(this).width() * this.cfg.scale;
                     this.c_h = this.cfg.height ? this.cfg.height : $(this).height() * this.cfg.scale;

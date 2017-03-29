@@ -1,6 +1,9 @@
 @import '../global.scss';
-
 .media {
-    padding:10px;
-    border-left:3px solid $bgColor;
+    padding: 20px;
+    border-left: 3px solid $yellow;
+    background-color: white;
+    margin-top: 8px;
+    border-radius: 4px;
+    @include boxShadow
 }
