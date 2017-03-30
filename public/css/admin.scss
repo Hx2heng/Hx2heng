@@ -1,3 +1,25 @@
 @import './lib/animated.css';
 @import './components/banner.scss';
 @import './components/nav.scss';
+.admin-content {
+    .admin-form,
+    .admin-list {
+        background-color: white;
+        padding: 20px 10px;
+    }
+    .admin-list {
+        table {
+            .label {
+                font-weight: normal;
+                padding: 2px;
+            }
+        }
+    }
+    .admin-form {
+        display: none;
+    }
+}
+
+.admin-side {
+    padding: 0;
+}

@@ -1,14 +1,51 @@
-<%- include('layouts/header',{styles:['admin']}) %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title><%= blog.title %></title>
+    <link rel="stylesheet" href="/css/admin.bundle.css">
+  </head>
+  <body>
+    <div class="container-fluid main">
+      <div class="row">
+<nav class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand animated slideInLeft" href="#">Hx2heng</a>
+    </div>
 
-   <div class="col-md-10 col-md-offset-1 content animated fadeInUp">
-         <div class="col-md-8">
-            
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/">首页 <span class="sr-only">(current)</span></a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+   <div class="col-md-12 content">
+         <div class="col-md-2 admin-side">
+            <div class="list-group">
+  <a href="/admin/admin-article" class="list-group-item <%- type=='admin-article'?'active':'' %>">
+   文章
+  </a>
+  <a href="/admin/admin-tools" class="list-group-item <%- type=='admin-tools'?'active':'' %>">工具</a>
+  <a href="/admin/admin-Input" class="list-group-item <%- type=='admin-Input'?'active':'' %>">游戏</a>
+  <a href="/admin/admin-setting" class="list-group-item <%- type=='admin-setting'?'active':'' %>">设置</a>
+</div>
          </div>
-         <div class="col-md-4">
-           
+         <div class="col-md-10 admin-content <%- type %>">
+            <%- include('./components/'+type) %>
          </div>
     </div>
 
-
+<%- include('layouts/footer') %>
 <script src="/js/admin.bundle.js"></script>
 

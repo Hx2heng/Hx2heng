@@ -1,0 +1,53 @@
+<div class="admin-list">
+<div class="col-md-2 col-md-offset-10">
+  <button type="button"  class="btn btn-success btn-block btn-create">新建</button>
+  </div>
+    <table class="table">
+      <caption>已发布文章</caption>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>文章标题</th>
+          <th>标签</th>
+          <th>发布日期</th>
+          <th>作者</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+</div>
+<div class="admin-form">
+<form method="post" action="createArticle">
+     <div class="form-group">
+    <label for="articleTitle">标题</label>
+    <input type="text" class="form-control" id="articleTitle" name="articleTitle" placeholder="标题" required>
+  </div>
+  <div class="form-group">
+    <label for="articleTags">文章标签：</label>
+    <label>
+      <input type="checkbox" name="tagJS">javascript
+    </label>
+    <label>
+      <input type="checkbox" name="tagCSS">css
+    </label>
+    <label>
+      <input type="checkbox" name="tagH5">html
+    </label>
+  </div>
+  <div class="form-group">
+    <label for="articleContent">内容</label>
+   <textarea data-provide="markdown" class="form-control" rows="23" id="articleContent" name="articleContent" placeholder=" 文章内容" required></textarea>
+  </div>
+  <p class="text-center"><%= success %><%= error %></p>
+  <div class="col-md-2 col-md-offset-8">
+  <button type="button" class="btn btn-warning btn-block btn-cancle">取消</button>
+  
+  </div>
+  <div class="col-md-2 ">
+ <button type="submit" data-loading-text="提交中..." class="btn btn-success btn-block btn-submit" autocomplete="off">提交</button>
+  
+  </div>
+</form>
+</div>
