@@ -2,6 +2,7 @@ import express from 'express'
 import { checkLogin, checkNotLogin } from './middlewares/check.js'
 import AdminsModel from './models/admins'
 import ArticlesModel from './models/articles'
+import moment from 'moment'
 
 let router = express.Router();
 
@@ -12,24 +13,54 @@ router.get('/', checkLogin, (req, res) => {
     res.render('admin', { type: 'banner' });
 })
 router.get('/admin-article', checkLogin, (req, res) => {
+
     res.render('admin', { type: 'admin-article' });
 })
 
 
 //根据当前用户用户查询所有文章
 router.get('/getAllArticles', checkLogin, (req, res) => {
-    ArticlesModel.findAllArticle(req.session.admin.name).then((articles) => {
+    ArticlesModel.findAllArticles(req.session.admin.name).then((articles) => {
         return res.json(articles);
     });
 
 })
 
-//发表文章页
-router.post('/createArticle', (req, res) => {
+//根据id查询某篇文章
+router.get('/getArticleById', checkLogin, (req, res) => {
+        let id = req.query.id;
+        if (!id) {
+            req.flash('error', '参数错误');
+            return res.redirect('back');
+        }
+        ArticlesModel.findArticleById(id).then((article) => {
+            return res.json(article);
+        }).catch((err) => {
+            return res.send(err)
+        });
+    })
+    //根据id删除某篇文章
+router.get('/deleteArticleById', checkLogin, (req, res) => {
+        let id = req.query.id;
+        if (!id) {
+            req.flash('error', '参数错误');
+            return res.redirect('back');
+        }
+        ArticlesModel.deleteArticleById(id).then((message) => {
+            req.flash('success', message);
+            return res.send(message);
+        }).catch((err) => {
+            return res.send(err)
+        });
+    })
+    //根据id修改某篇文章
+router.post('/updateArticle/:id', checkLogin, (req, res) => {
     var title = req.body.articleTitle;
     var content = req.body.articleContent;
-    var tags = ['js', 'css', 'h5'];
-    // 校验参数
+    var id = req.params.id;
+    var tags = [];
+    console.log(id)
+        // 校验参数
     try {
         if (!title.length) {
             throw new Error('请填写标题');
@@ -37,30 +68,84 @@ router.post('/createArticle', (req, res) => {
         if (!content.length) {
             throw new Error('请填写内容');
         }
-        if (!req.session.admin) {
-            throw new Error('用户未登录');
+        if (!id) {
+            throw new Error('参数错误');
         }
     } catch (e) {
         req.flash('error', e.message);
         return res.redirect('back');
     }
-    var article = {
-        title: req.body.articleTitle,
-        content: req.body.articleContent,
-        tags: ['js', 'css', 'h5'],
-        id: 2,
-        author: req.session.admin.name,
-    };
-
-    ArticlesModel.createArticles(article).then((message) => {
+    var newArticle = {
+        _id: id,
+        title: title,
+        content: content,
+        tags: tags
+    }
+    ArticlesModel.updateOneArticle(newArticle).then((message) => {
         req.flash('success', message);
         return res.redirect('back');
-    })
-
-
-    console.log(article);
+    }).catch((err) => {
+        return res.send(err)
+    });
 })
 
+//发表文章页
+router.post('/createArticle', checkLogin, (req, res) => {
+        var title = req.body.articleTitle;
+        var content = req.body.articleContent;
+        var tags = ['js', 'css', 'h5'];
+        // 校验参数
+        try {
+            if (!title.length) {
+                throw new Error('请填写标题');
+            }
+            if (!content.length) {
+                throw new Error('请填写内容');
+            }
+        } catch (e) {
+            req.flash('error', e.message);
+            return res.redirect('back');
+        }
+        var article = {
+            title: title,
+            content: content,
+            tags: tags,
+            author: req.session.admin.name,
+            pv: 0,
+            createDate: moment().format('YYYY/MM/DD'),
+            createTime: moment().format('HH:mm')
+        };
+
+        ArticlesModel.createArticles(article).then((message) => {
+            req.flash('success', message);
+            return res.redirect('back');
+        }).catch((err) => {
+            return res.send(err)
+        })
+
+
+        console.log(article);
+    })
+    //获取当前用户所有标签
+router.get('/getAllArticleTags', checkLogin, (req, res) => {
+        AdminsModel.findAllArticleTagsByAdmin(req.session.admin.name).then((articleTags) => {
+            return res.send(articleTags);
+        }).catch((err) => {
+            return res.send(err)
+        })
+
+    })
+    //根据当前用户新增标签
+router.get('/addArtcleTag', checkLogin, (req, res) => {
+    let newTagName = req.query.newTagName;
+    console.log(newTagName);
+    AdminsModel.addArtcleTagsByAdmin(req.session.admin.name, newTagName).then((message) => {
+        return res.send(message);
+    }).catch((err) => {
+        return res.send(err)
+    });
+
+})
 
 
 

@@ -1,6 +1,7 @@
 import { AdminModel } from '../lib/mongo';
 
 const admins = {
+    //根据用户名获取用户对象
     getAdminByName: (name) => {
         return new Promise((resolve, reject) => {
             AdminModel.findOne({ name: name }, (err, admin) => {
@@ -9,6 +10,45 @@ const admins = {
                 } else {
                     resolve(admin)
                 }
+            })
+        })
+    },
+    //查询所有文章标签/查询特定用户的所有文章标签
+    findAllArticleTagsByAdmin: (admin) => {
+        return new Promise((resolve, reject) => {
+            var query = {};
+            if (admin) {
+                query.name = admin;
+            }
+            AdminModel.find(query, (err, models) => {
+                if (err) {
+                    reject(err);
+                }
+                console.log(models);
+                if (models.length == 1) {
+                    resolve(models[0].articleTags);
+                }
+                resolve(models);
+            });
+        })
+    },
+    //根据特定用户添加文章标签
+    addArtcleTagsByAdmin: (admin, newTag) => {
+        return new Promise((resolve, reject) => {
+            if (!admin || !newTag) {
+                reject(new Error('参数错误'))
+            }
+            AdminModel.findOne({ name: admin }, (err, models) => {
+                if (err) {
+                    reject(err);
+                }
+                models.articleTags.push(newTag);
+                models.save((err) => {
+                    if (err) {
+                        reject(err)
+                    }
+                    resolve('添加标签成功');
+                })
             })
         })
     }

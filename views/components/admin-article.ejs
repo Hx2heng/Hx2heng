@@ -1,4 +1,4 @@
-<div class="admin-list">
+<div class="admin-list table-responsive animated slideInDown">
 <div class="col-md-2 col-md-offset-10">
   <button type="button"  class="btn btn-success btn-block btn-create">新建</button>
   </div>
@@ -18,6 +18,7 @@
       </tbody>
     </table>
 </div>
+
 <div class="admin-form">
 <form method="post" action="createArticle">
      <div class="form-group">
@@ -26,21 +27,30 @@
   </div>
   <div class="form-group">
     <label for="articleTags">文章标签：</label>
-    <label>
-      <input type="checkbox" name="tagJS">javascript
-    </label>
-    <label>
-      <input type="checkbox" name="tagCSS">css
-    </label>
-    <label>
-      <input type="checkbox" name="tagH5">html
-    </label>
+    
+    <div class="tag-panel">
+    <div class="tags">
+    <input type="checkbox" name="tag-javascript" id="tag-javascript">
+    <label for="tag-javascript">javascript</label>
+    
+      <input type="checkbox" name="tag-css" id="tag-css">
+    <label for="tag-css">css</label>
+    
+      <input type="checkbox" name="tag-html" id="tag-html">
+    <label for="tag-html">html</label>
+    </div>
+      
+      
+      <label><a><span class="glyphicon glyphicon-plus"  data-toggle="modal" data-target="#addTagModal" aria-hidden="true"></span></a></label>
+    </div>
+    
+
   </div>
   <div class="form-group">
     <label for="articleContent">内容</label>
    <textarea data-provide="markdown" class="form-control" rows="23" id="articleContent" name="articleContent" placeholder=" 文章内容" required></textarea>
   </div>
-  <p class="text-center"><%= success %><%= error %></p>
+  <p class="text-center"></p>
   <div class="col-md-2 col-md-offset-8">
   <button type="button" class="btn btn-warning btn-block btn-cancle">取消</button>
   
@@ -51,3 +61,25 @@
   </div>
 </form>
 </div>
+
+
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="addTagModal">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">新建标签</h4>
+      </div>
+      <div class="modal-body">
+          <input type="text" class="form-control" name="tagName" id="tagNameInput" placeholder="新标签">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="addTag" >新建</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

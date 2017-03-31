@@ -17,6 +17,32 @@
     }
     .admin-form {
         display: none;
+        .tag-panel {
+            label {
+                position: relative;
+                margin: 0 10px 0 0;
+                display: inline-block;
+                @include border;
+                border-style: dotted;
+                padding: 0 10px;
+                border-radius: 4px;
+                overflow: hidden;
+                font-weight: normal;
+                margin-top: 3px;
+            }
+            input {
+                display: none;
+                &:checked+label {
+                    background: $blue;
+                    color: white;
+                    border-color: white;
+                    border-style: solid;
+                }
+            }
+            .tags {
+                display: inline-block
+            }
+        }
     }
 }
 
