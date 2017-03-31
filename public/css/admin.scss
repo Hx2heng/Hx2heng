@@ -23,7 +23,6 @@
                 margin: 0 10px 0 0;
                 display: inline-block;
                 @include border;
-                border-style: dotted;
                 padding: 0 10px;
                 border-radius: 4px;
                 overflow: hidden;
@@ -40,7 +39,10 @@
                 }
             }
             .tags {
-                display: inline-block
+                display: inline-block;
+                label {
+                    border-style: dotted;
+                }
             }
         }
     }

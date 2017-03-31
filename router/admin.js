@@ -36,7 +36,7 @@ router.get('/getArticleById', checkLogin, (req, res) => {
         ArticlesModel.findArticleById(id).then((article) => {
             return res.json(article);
         }).catch((err) => {
-            return res.send(err)
+            return res.status(404).end(err);
         });
     })
     //根据id删除某篇文章
@@ -59,8 +59,8 @@ router.post('/updateArticle/:id', checkLogin, (req, res) => {
     var content = req.body.articleContent;
     var id = req.params.id;
     var tags = [];
-    console.log(id)
-        // 校验参数
+
+    // 校验参数
     try {
         if (!title.length) {
             throw new Error('请填写标题');
@@ -75,25 +75,46 @@ router.post('/updateArticle/:id', checkLogin, (req, res) => {
         req.flash('error', e.message);
         return res.redirect('back');
     }
-    var newArticle = {
-        _id: id,
-        title: title,
-        content: content,
-        tags: tags
-    }
-    ArticlesModel.updateOneArticle(newArticle).then((message) => {
-        req.flash('success', message);
-        return res.redirect('back');
+
+    //获取当前用户所有标签
+    AdminsModel.findAllArticleTagsByAdmin(req.session.admin.name).then((articleTags) => {
+
+        //进行标签匹配
+        articleTags.map((item) => {
+            if (req.body['tag-' + item] == 'on') {
+                tags.push(item)
+            }
+        })
+        var newArticle = {
+            _id: id,
+            title: title,
+            content: content,
+            tags: tags
+        }
+
+        ArticlesModel.updateOneArticle(newArticle).then((message) => {
+            req.flash('success', message);
+            return res.redirect('back');
+        }).catch((err) => {
+            return res.send(err)
+        });
+
     }).catch((err) => {
-        return res.send(err)
-    });
+        req.flash('error', err);
+        return res.redirect('back');
+    })
+
+
+
 })
 
 //发表文章页
 router.post('/createArticle', checkLogin, (req, res) => {
         var title = req.body.articleTitle;
         var content = req.body.articleContent;
-        var tags = ['js', 'css', 'h5'];
+        var tags = [];
+
+        console.log(req.body);
         // 校验参数
         try {
             if (!title.length) {
@@ -106,25 +127,41 @@ router.post('/createArticle', checkLogin, (req, res) => {
             req.flash('error', e.message);
             return res.redirect('back');
         }
-        var article = {
-            title: title,
-            content: content,
-            tags: tags,
-            author: req.session.admin.name,
-            pv: 0,
-            createDate: moment().format('YYYY/MM/DD'),
-            createTime: moment().format('HH:mm')
-        };
+        //获取当前用户所有标签
+        AdminsModel.findAllArticleTagsByAdmin(req.session.admin.name).then((articleTags) => {
 
-        ArticlesModel.createArticles(article).then((message) => {
-            req.flash('success', message);
-            return res.redirect('back');
+            //进行标签匹配
+            articleTags.map((item) => {
+                if (req.body['tag-' + item] == 'on') {
+                    tags.push(item)
+                }
+            })
+            var article = {
+                title: title,
+                content: content,
+                tags: tags,
+                author: req.session.admin.name,
+                pv: 0,
+                createDate: moment().format('YYYY/MM/DD'),
+                createTime: moment().format('HH:mm')
+            };
+
+            ArticlesModel.createArticles(article).then((message) => {
+                req.flash('success', message);
+                return res.redirect('back');
+            }).catch((err) => {
+                return res.send(err)
+            })
+
         }).catch((err) => {
-            return res.send(err)
+            req.flash('error', err);
+            return res.redirect('back');
         })
 
 
-        console.log(article);
+
+
+
     })
     //获取当前用户所有标签
 router.get('/getAllArticleTags', checkLogin, (req, res) => {
@@ -138,7 +175,6 @@ router.get('/getAllArticleTags', checkLogin, (req, res) => {
     //根据当前用户新增标签
 router.get('/addArtcleTag', checkLogin, (req, res) => {
     let newTagName = req.query.newTagName;
-    console.log(newTagName);
     AdminsModel.addArtcleTagsByAdmin(req.session.admin.name, newTagName).then((message) => {
         return res.send(message);
     }).catch((err) => {

@@ -23,8 +23,8 @@ const admins = {
             AdminModel.find(query, (err, models) => {
                 if (err) {
                     reject(err);
+                    return;
                 }
-                console.log(models);
                 if (models.length == 1) {
                     resolve(models[0].articleTags);
                 }
@@ -36,19 +36,34 @@ const admins = {
     addArtcleTagsByAdmin: (admin, newTag) => {
         return new Promise((resolve, reject) => {
             if (!admin || !newTag) {
-                reject(new Error('参数错误'))
+                reject(new Error('参数错误'));
+                return;
             }
             AdminModel.findOne({ name: admin }, (err, models) => {
                 if (err) {
                     reject(err);
+                    return;
                 }
-                models.articleTags.push(newTag);
-                models.save((err) => {
-                    if (err) {
-                        reject(err)
+                //判断是否存在标签
+                let isExist = false;
+                models.articleTags.map((tag) => {
+                    if (tag == newTag) {
+                        reject('已存在的标签');
+                        isExist = true;
+                        return;
                     }
-                    resolve('添加标签成功');
                 })
+                if (!isExist) {
+                    models.articleTags.push(newTag);
+                    models.save((err) => {
+                        if (err) {
+                            reject(err);
+                            return;
+                        }
+                        resolve('添加标签成功');
+                    })
+                }
+
             })
         })
     }

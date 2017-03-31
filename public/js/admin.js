@@ -30,9 +30,9 @@ window.onload = () => {
                 type: 'get',
                 success: (res) => {
                     var tags = res;
-                    tags.map((item, i) => {
+                    tags.map((item) => {
                         //日后改模板引擎法
-                        var tag = $('<input type="checkbox" name="tag-' + item + '" id="tag-javascript"><label for="tag-javascript">' + item + '</label>');
+                        var tag = $('<input type="checkbox" name="tag-' + item + '" id="tag-' + item + '"><label for="tag-' + item + '">' + item + '</label>');
                         $('.tags').append(tag);
                     })
                 }
@@ -53,28 +53,30 @@ window.onload = () => {
                     success: function(res) {
                         alert(res);
                         $('#addTagModal').modal('hide');
-                        getAllArticleTagsToTagPanel();
+                        $('.tags').append($('<input type="checkbox" name="tag-' + newTagName + '" id="tag-' + newTagName + '"><label for="tag-' + newTagName + '">' + newTagName + '</label>'));
                     }
                 })
             })
             //编辑文章
         $('.admin-list').on('click', '.btn-edit', function() {
-
             var articleId = $(this).attr('data-target');
+            console.log(articleId);
             $.ajax({
                 url: 'getArticleById',
                 type: 'get',
                 data: { id: articleId },
                 success: (res) => {
-                    if (!res[0]) {
+                    if (!res) {
                         return false;
                     }
                     $('.admin-list').hide();
                     $('.admin-form').fadeIn();
-                    $('.admin-form').find('form').attr('action', 'updateArticle/' + res[0]._id);
-                    console.log(res);
+                    $('.admin-form').find('form').attr('action', 'updateArticle/' + res._id);
                     clearEditor();
-                    insertEditor(res[0].title, res[0].content);
+                    insertEditor(res.title, res.content, res.tags);
+                },
+                error: (err) => {
+                    console.log(err.responseText);
                 }
             })
         })
@@ -107,6 +109,15 @@ window.onload = () => {
         function insertEditor(title, content, tags) {
             $('#articleTitle').val(title);
             $('#articleContent').val(content);
+            $('.tags').find('input').each(function() {
+                $(this).removeAttr('checked')
+            })
+            tags.map((item) => {
+                $('.tags').find('input[name=tag-' + item + ']').each(function() {
+                    console.log($(this));
+                    $(this).attr('checked', true)
+                })
+            })
         }
 
         //文本编辑框初始化

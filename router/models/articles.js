@@ -8,6 +8,7 @@ const articles = {
             oneArticle.save((err) => {
                 if (err) {
                     reject(err);
+                    return;
                 }
                 resolve('插入成功');
             });
@@ -23,6 +24,7 @@ const articles = {
             ArticleModel.find(query, null, { sort: { '_id': -1 } }, (err, articles) => {
                 if (err) {
                     reject(err);
+                    return;
                 }
                 resolve(articles)
             });
@@ -35,11 +37,13 @@ const articles = {
         return new Promise((resolve, reject) => {
             let query = {};
             if (!id) {
-                reject(new Error('缺少_id'));
+                reject('文章已被删除');
+                return;
             }
             ArticleModel.findById(id, (err, article) => {
                 if (err) {
-                    reject(err);
+                    reject('找不到文章');
+                    return;
                 }
                 resolve(article)
             });
@@ -53,10 +57,12 @@ const articles = {
             let query = {};
             if (!id) {
                 reject(new Error('缺少_id'));
+                return;
             }
             ArticleModel.remove({ _id: id }, (err) => {
                 if (err) {
                     reject(err);
+                    return;
                 }
                 resolve('删除成功！')
             });
@@ -73,6 +79,7 @@ const articles = {
             ArticleModel.findById(newArticle._id, (err, article) => {
                 if (err) {
                     reject(err);
+                    return;
                 }
                 article.title = newArticle.title;
                 article.content = newArticle.content;
@@ -80,6 +87,7 @@ const articles = {
                 article.save((err) => {
                     if (err) {
                         reject(err);
+                        return;
                     }
                     resolve('更新文章成功');
                 })

@@ -10,7 +10,7 @@ db.once('open', function() {
 });
 //管理员
 var AdminSchema = new mongoose.Schema({
-    name: String,
+    name: { type: String, unique: true },
     password: String,
     articleTags: Array
 })
