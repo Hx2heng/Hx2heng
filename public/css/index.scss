@@ -1,4 +1,6 @@
+@import './global.scss';
 @import './lib/animated.css';
+@import './lib/markdown/markdown.css';
 @import './components/banner.scss';
 @import './components/nav.scss';
 @import './components/artListItem.scss';
@@ -6,4 +8,17 @@
     width: 100px;
     height: 100px;
     background-image: url(../images/logo.png)
+}
+
+.information {
+    position: fixed;
+    height: 100%;
+    background: #222222;
+    padding: 10px;
+}
+
+@media (max-width: 992px) {
+    .information {
+        position: static;
+    }
 }

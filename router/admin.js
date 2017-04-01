@@ -50,7 +50,7 @@ router.get('/deleteArticleById', checkLogin, (req, res) => {
             req.flash('success', message);
             return res.send(message);
         }).catch((err) => {
-            return res.send(err)
+            return res.status(403).send(err)
         });
     })
     //根据id修改某篇文章
@@ -96,7 +96,7 @@ router.post('/updateArticle/:id', checkLogin, (req, res) => {
             req.flash('success', message);
             return res.redirect('back');
         }).catch((err) => {
-            return res.send(err)
+            return res.status(403).send(err)
         });
 
     }).catch((err) => {
@@ -145,12 +145,12 @@ router.post('/createArticle', checkLogin, (req, res) => {
                 createDate: moment().format('YYYY/MM/DD'),
                 createTime: moment().format('HH:mm')
             };
-
+            //上传文章
             ArticlesModel.createArticles(article).then((message) => {
                 req.flash('success', message);
                 return res.redirect('back');
             }).catch((err) => {
-                return res.send(err)
+                return res.status(403).send(err)
             })
 
         }).catch((err) => {
@@ -168,21 +168,30 @@ router.get('/getAllArticleTags', checkLogin, (req, res) => {
         AdminsModel.findAllArticleTagsByAdmin(req.session.admin.name).then((articleTags) => {
             return res.send(articleTags);
         }).catch((err) => {
-            return res.send(err)
+            return res.status(404).send(err)
         })
 
     })
     //根据当前用户新增标签
 router.get('/addArtcleTag', checkLogin, (req, res) => {
-    let newTagName = req.query.newTagName;
-    AdminsModel.addArtcleTagsByAdmin(req.session.admin.name, newTagName).then((message) => {
+        let newTagName = req.query.newTagName;
+        AdminsModel.addArtcleTagsByAdmin(req.session.admin.name, newTagName).then((message) => {
+            return res.send(message);
+        }).catch((err) => {
+            return res.status(403).send(err)
+        });
+
+    })
+    //根据当前用户删除标签
+router.get('/delArtcleTag', checkLogin, (req, res) => {
+    let tags = req.query.tags;
+    AdminsModel.delArtcleTagsByAdmin(req.session.admin.name, tags).then((message) => {
         return res.send(message);
     }).catch((err) => {
-        return res.send(err)
+        return res.status(403).send(err)
     });
 
 })
-
 
 
 export default router

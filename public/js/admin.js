@@ -54,13 +54,15 @@ window.onload = () => {
                         alert(res);
                         $('#addTagModal').modal('hide');
                         $('.tags').append($('<input type="checkbox" name="tag-' + newTagName + '" id="tag-' + newTagName + '"><label for="tag-' + newTagName + '">' + newTagName + '</label>'));
+                    },
+                    error: (err) => {
+                        alert(err.responseText);
                     }
                 })
             })
             //编辑文章
         $('.admin-list').on('click', '.btn-edit', function() {
             var articleId = $(this).attr('data-target');
-            console.log(articleId);
             $.ajax({
                 url: 'getArticleById',
                 type: 'get',
@@ -72,7 +74,7 @@ window.onload = () => {
                     $('.admin-list').hide();
                     $('.admin-form').fadeIn();
                     $('.admin-form').find('form').attr('action', 'updateArticle/' + res._id);
-                    clearEditor();
+
                     insertEditor(res.title, res.content, res.tags);
                 },
                 error: (err) => {
@@ -100,22 +102,51 @@ window.onload = () => {
                 }
 
             })
-            //清空编辑器
+            //删除标签
+        $('#delTags').on('click', function() {
+            var selectedTags = [];
+            $('.tags').find('input').each(function() {
+                if ($(this).is(':checked')) selectedTags.push($.trim($(this).attr('name').slice(4)));
+            })
+            if (selectedTags.length == 0) {
+                return;
+            }
+            var r = confirm("确定删除这些标签吗？" + selectedTags);
+            if (r == true) {
+                $.ajax({
+                    url: 'delArtcleTag',
+                    type: 'get',
+                    data: { tags: selectedTags },
+                    success: (res) => {
+                        getAllArticleTagsToTagPanel();
+                    },
+                    error: (err) => {
+
+                    }
+                })
+            } else {
+                return false;
+            }
+        })
+
+        //清空编辑器
         function clearEditor() {
             $('#articleContent').val('');
             $('#articleTitle').val('');
+            $('.tags').find('input[type="checkbox"]').each(function() {
+                $(this).prop('checked', false);
+            })
         }
+
         //插入内容到编辑器
         function insertEditor(title, content, tags) {
+            clearEditor();
             $('#articleTitle').val(title);
             $('#articleContent').val(content);
-            $('.tags').find('input').each(function() {
-                $(this).removeAttr('checked')
-            })
             tags.map((item) => {
                 $('.tags').find('input[name=tag-' + item + ']').each(function() {
-                    console.log($(this));
-                    $(this).attr('checked', true)
+                    //新版本这里需要用到prop而不是attr
+                    $(this).prop('checked', true)
                 })
             })
         }
@@ -127,13 +158,14 @@ window.onload = () => {
         $('.btn-create').on('click', function() {
             clearEditor();
             $('.admin-list').hide();
-            $('.admin-form').fadeIn();
+            $('.admin-form').show();
         })
 
         //取消发布
         $('.btn-cancle').on('click', function() {
+            clearEditor();
             $('.admin-form').hide();
-            $('.admin-list').fadeIn();
+            $('.admin-list').show();
             $('.admin-form').find('form').attr('action', 'createArticle');
         })
 

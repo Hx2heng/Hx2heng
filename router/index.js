@@ -1,6 +1,6 @@
 import express from 'express'
 import ArticlesModel from './models/articles'
-
+import marked from 'marked'
 let router = express.Router();
 
 router.use((req, res, next) => {
@@ -8,8 +8,12 @@ router.use((req, res, next) => {
 })
 router.get('/', (req, res) => {
     ArticlesModel.findAllArticles().then((articles) => {
-        let data = articles;
-        res.render('index', { articles: data });
+        articles.map((article) => {
+            article.content = marked(article.content.toString());
+        })
+
+
+        res.render('index', { articles: articles });
     });
 
 })

@@ -66,6 +66,24 @@ const admins = {
 
             })
         })
+    },
+    //根据特定用户删除文章标签
+    delArtcleTagsByAdmin: (admin, tags) => {
+        return new Promise((resolve, reject) => {
+            if (!admin || !tags) {
+                reject(new Error('参数错误'));
+                return;
+            }
+            AdminModel.update({ name: admin }, { '$pullAll': { 'articleTags': tags } }, (err) => {
+                if (err) {
+                    console.log(err);
+                    reject(err);
+                    return;
+                }
+                resolve('删除标签成功！');
+            });
+
+        })
     }
 }
 

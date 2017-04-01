@@ -1,22 +1,17 @@
-@import '../global.scss';
-.navbar{
-    border:none;
+.navbar {
+    border: none;
     li {
-    position: relative;
-    a:hover{
-        background-color: rgba(255, 191, 0, 0.7) !important;
+        position: relative;
+        a:hover {
+            background-color: rgba(255, 191, 0, 0.7) !important;
+        }
+    }
+    a.navbar-brand {
+        background-color: $yellow;
+        color: $black;
+    }
+    a.navbar-brand:hover {
+        background-color: $yellow;
+        color: white;
     }
 }
-a.navbar-brand{
-    background-color: $yellow;
-    color:$black;
-   
-
-}
-a.navbar-brand:hover{
-    background-color: $yellow;
-    color:white;
-   
-
-}
-} 

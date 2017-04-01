@@ -1,9 +1,72 @@
-@import '../global.scss';
-.media {
-    padding: 20px;
-    border-left: 3px solid $yellow;
-    background-color: white;
-    margin-top: 8px;
-    border-radius: 4px;
-    @include boxShadow
+.article {
+    margin-bottom: 30px;
+    position: relative;
+    @include boxShadow;
+    background: #fff;
+    -webkit-transition: all 0.2s ease-in;
+}
+
+.article-meta {
+    width: 150px;
+    font-size: 14;
+    text-align: right;
+    position: absolute;
+    right: 0;
+    top: 10px;
+    text-align: center;
+    z-index: 1;
+    .article-date {
+        color: #aaa;
+        font-size: 1em;
+    }
+}
+
+.article-inner {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.article-info {
+    color: #aaa;
+    margin: 0
+}
+
+.article-header {
+    border-left: 6px solid $yellow;
+    padding: 4px 0px 15px 25px;
+    transition: all ease 0.3s;
+    background-color: white
+}
+
+.article-header:hover {
+    box-shadow: 0 2px 20px #808080;
+    margin-bottom: 20px;
+    transform: scale(1.01)
+}
+
+.article-title {
+    color: #696969;
+    margin-left: 0px;
+    font-weight: 300;
+    line-height: 35px;
+    margin-bottom: 20px;
+    font-size: 26px;
+    transition: color 0.3s;
+}
+
+.article-title:hover {
+    color: $yellow;
+    text-decoration: none;
+}
+
+.article-entry {
+    line-height: 1.8em;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.article-info-index.article-info {
+    padding-top: 20px;
+    margin: 30px 30px 0 30px;
+    border-top: 1px solid #ddd;
 }
