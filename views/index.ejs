@@ -6,7 +6,9 @@
             <%- include('./components/infoSide') %>
          </div>
          <div class="col-md-9 col-md-offset-3">
-            <%- include('./components/artList') %>
+            <% articles.map(function(article){%>
+                <%- include('./components/article',{article:article,isConcrete:false}) %>
+            <%});%> 
          </div>
     </div>
 

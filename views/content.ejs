@@ -1,16 +1,15 @@
 <%- include('layouts/header',{styles:['content']}) %>
 
 
-    <div class="col-md-8 col-md-offset-2 content">
+    <div class="col-md-8 col-md-offset-2 content animated slideInDown">
     <ol class="breadcrumb">
-  <li><a href="/">首页</a></li>
-  <li class="active"><%- title %></li>
+  <li><a href="/artList">文章列表</a></li>
+  <li class="active">《<%- article.title %>》</li>
 </ol>
-        <div class="markdown-body">
-            <%- content %>
-        </div>
-    </div>
+   <%- include('./components/article',{article:article,isConcrete:true}) %>
 
+    </div>
+</div>
 <%- include('layouts/footer') %>
 <script src="/js/content.bundle.js"></script>
 

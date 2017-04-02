@@ -34,6 +34,7 @@ router.get('/getArticleById', checkLogin, (req, res) => {
             return res.redirect('back');
         }
         ArticlesModel.findArticleById(id).then((article) => {
+
             return res.json(article);
         }).catch((err) => {
             return res.status(404).end(err);
@@ -142,7 +143,7 @@ router.post('/createArticle', checkLogin, (req, res) => {
                 tags: tags,
                 author: req.session.admin.name,
                 pv: 0,
-                createDate: moment().format('YYYY/MM/DD'),
+                createDate: moment().format('YYYY/M/D'),
                 createTime: moment().format('HH:mm')
             };
             //上传文章
