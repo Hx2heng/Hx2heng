@@ -16,6 +16,10 @@ router.get('/admin-article', checkLogin, (req, res) => {
 
     res.render('admin', { type: 'admin-article' });
 })
+router.get('/admin-game', checkLogin, (req, res) => {
+
+    res.render('admin', { type: 'admin-game' });
+})
 
 
 //根据当前用户用户查询所有文章

@@ -32,7 +32,7 @@ window.onload = () => {
                     var tags = res;
                     tags.map((item) => {
                         //日后改模板引擎法
-                        var tag = $('<input type="checkbox" name="tag-' + item + '" id="tag-' + item + '"><label for="tag-' + item + '">' + item + '</label>');
+                        var tag = $('<input type="checkbox" name="tag-' + item + '" id="tag-' + item + '"><label for="tag-' + item + '" data-type="' + item + '">' + item + '</label>');
                         $('.tags').append(tag);
                     })
                 }

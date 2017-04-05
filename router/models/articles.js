@@ -35,7 +35,6 @@ const articles = {
     //根据Id查询某篇文章
     findArticleById: (id) => {
         return new Promise((resolve, reject) => {
-            let query = {};
             if (!id) {
                 reject('文章已被删除');
                 return;
@@ -93,7 +92,26 @@ const articles = {
                 })
             })
         })
-    }
+    },
+    //根据标签查找所有文章
+    findAllArticlesByTags: (type) => {
+        return new Promise((resolve, reject) => {
+            if (!type) {
+                reject('找不到标签');
+                return;
+            }
+            let query = {
+                tags: type
+            };
+            ArticleModel.find(query, null, { sort: { '_id': -1 } }, (err, articles) => {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve(articles)
+            });
+        })
+    },
 }
 
 export default articles

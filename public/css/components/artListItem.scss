@@ -1,7 +1,7 @@
 .article {
     position: relative;
     @include boxShadow;
-    background: #fff;
+    background-color: #fff;
     -webkit-transition: all 0.2s ease-in;
 }
 
@@ -22,7 +22,7 @@
 
 .article-inner {
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .article-info {
@@ -76,9 +76,41 @@
         font-size: .5em;
         font-weight: normal;
         display: inline-block;
-        background-color: $yellow;
+        background-color: #7b5cff;
         border-radius: 3px;
         color: white;
         padding: 1px 4px;
+    }
+}
+
+//tags
+label[data-type="javascript"] {
+    background-color: #00d3ff;
+}
+
+label[data-type="css"] {
+    background-color: #ffc107;
+}
+
+label[data-type="html"] {
+    background-color: #ff6e6e;
+}
+
+label[data-type="game"] {
+    background-color: #1b67ea;
+}
+
+//article-only-list
+.article-only-list {
+    box-shadow: none;
+    background-color: initial;
+    border-bottom: 1px solid #c7c7c7;
+    .article-inner {
+        margin-bottom: 0px;
+    }
+    .article-header:hover {
+        margin-bottom: 0px;
+        transform: scale(1.01);
+        border-color: #ff6e6e;
     }
 }
