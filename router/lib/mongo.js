@@ -27,5 +27,16 @@ var ArticleSchema = new mongoose.Schema({
     updateDate: String
 })
 var ArticleModel = db.model('articles', ArticleSchema);
-
-export { AdminModel, ArticleModel }
+//游戏
+var GameSchema = new mongoose.Schema({
+    title: String,
+    content: String,
+    url: String,
+    author: String,
+    pv: Number,
+    createDate: String,
+    createTime: String,
+    updateDate: String
+})
+var GameModel = db.model('games', GameSchema);
+export { AdminModel, ArticleModel, GameModel }

@@ -3,11 +3,11 @@
 
     <div class="col-md-12 content">
          <div class="col-md-3 information">
-            <%- include('./components/infoSide') %>
+             <%- include('./components/game-list') %>
          </div>
          <div class="col-md-9 col-md-offset-3">
             <% articles.map(function(article){%>
-                <%- include('./components/article',{article:article,isConcrete:false}) %>
+                <%- include('./components/article',{data:article,isConcrete:false}) %>
             <%});%> 
          </div>
     </div>

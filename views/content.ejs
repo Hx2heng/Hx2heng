@@ -3,10 +3,11 @@
 
     <div class="col-md-8 col-md-offset-2 content animated slideInDown">
     <ol class="breadcrumb">
-  <li><a href="/artList">文章列表</a></li>
-  <li class="active">《<%- article.title %>》</li>
+  <li><a href="<%- type == 'article'?'/artList':'/gameList' %>">列表</a></li>
+  <li class="active">《<%- data.title %>》</li>
 </ol>
-   <%- include('./components/article',{article:article,isConcrete:true}) %>
+
+   <%- include('./components/'+type,{data:data}) %>
 
     </div>
 </div>

@@ -2,6 +2,7 @@ import express from 'express'
 import { checkLogin, checkNotLogin } from './middlewares/check.js'
 import AdminsModel from './models/admins'
 import ArticlesModel from './models/articles'
+import GamesModel from './models/games'
 import moment from 'moment'
 
 let router = express.Router();
@@ -198,5 +199,110 @@ router.get('/delArtcleTag', checkLogin, (req, res) => {
 
 })
 
+
+
+//发表游戏页
+router.post('/createGame', checkLogin, (req, res) => {
+    var title = req.body.gameTitle;
+    var content = req.body.gameContent;
+    var url = req.body.gameUrl;
+    console.log(title, content, url);
+    // 校验参数
+    try {
+        if (!title.length) {
+            throw new Error('请填写标题');
+        }
+    } catch (e) {
+        req.flash('error', e.message);
+        return res.redirect('back');
+    }
+    var game = {
+            title: title,
+            content: content,
+            url: url,
+            author: req.session.admin.name,
+            pv: 0,
+            createDate: moment().format('YYYY/M/D'),
+            createTime: moment().format('HH:mm')
+        }
+        //上传游戏
+    GamesModel.createGames(game).then((message) => {
+        req.flash('success', message);
+        return res.redirect('back');
+    }).catch((err) => {
+        return res.status(403).send(err)
+    })
+
+})
+
+//根据当前用户用户查询所有游戏
+router.get('/getAllGames', checkLogin, (req, res) => {
+        GamesModel.findAllGames(req.session.admin.name).then((games) => {
+            return res.json(games);
+        });
+    })
+    //根据id查询某个文章
+router.get('/getGameById', checkLogin, (req, res) => {
+        let id = req.query.id;
+        if (!id) {
+            req.flash('error', '参数错误');
+            return res.redirect('back');
+        }
+        GamesModel.findGameById(id).then((game) => {
+            return res.json(game);
+        }).catch((err) => {
+            return res.status(404).end(err);
+        });
+    })
+    //根据id删除某个文章
+router.get('/deleteGameById', checkLogin, (req, res) => {
+    let id = req.query.id;
+    if (!id) {
+        req.flash('error', '参数错误');
+        return res.redirect('back');
+    }
+    GamesModel.deleteGameById(id).then((message) => {
+        req.flash('success', message);
+        return res.send(message);
+    }).catch((err) => {
+        return res.status(403).send(err)
+    });
+})
+
+//根据id修改某篇文章
+router.post('/updateGame/:id', checkLogin, (req, res) => {
+    var title = req.body.gameTitle;
+    var content = req.body.gameContent;
+    var url = req.body.gameUrl;
+    var id = req.params.id;
+
+    // 校验参数
+    try {
+        if (!title.length) {
+            throw new Error('请填写标题');
+        }
+    } catch (e) {
+        req.flash('error', e.message);
+        return res.redirect('back');
+    }
+
+    var newGame = {
+        _id: id,
+        title: title,
+        content: content,
+        url: url
+    }
+
+    GamesModel.updateOneGame(newGame).then((message) => {
+        req.flash('success', message);
+        return res.redirect('back');
+    }).catch((err) => {
+        return res.status(403).send(err)
+
+    })
+
+
+
+})
 
 export default router

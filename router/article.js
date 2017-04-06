@@ -14,7 +14,9 @@ router.get('/:id', (req, res) => {
     ArticlesModel.findArticleById(id).then((article) => {
         article.content = marked(article.content);
         res.render('content', {
-            article: article
+            type: 'article',
+            data: article,
+            isConcrete: true
         })
     }).catch((err) => {
         return res.status(404).end(err);
