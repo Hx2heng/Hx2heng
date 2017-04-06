@@ -1,0 +1,9 @@
+
+
+<div class="tag-select">
+    <a href="/artList" class="<%- activeTag=='all'?'active':'' %>">全部</a>
+    <% tags.map(function(tag){%>
+        <a href="/artList?type=<%=tag%>" class="<%- tag == activeTag?'active':'' %>"><%=tag%></a>
+    <%});%> 
+</div>
+

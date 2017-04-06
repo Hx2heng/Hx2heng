@@ -1,0 +1,24 @@
+  <% games.map(function(game){%>
+
+<article class="article animated slideInDown game-only-list" >
+  
+    <div class="article-meta">
+  	<time class="article-date"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <%= game.createDate %> <%= game.createTime %></time>
+
+    </div>
+  
+  <div class="article-inner">
+      <header class="article-header">
+    <h1>
+      <a class="article-title" href="/game/game?id=<%- game._id %>"><%- game.title %></a>
+    </h1>
+  <p class="article-info">From:<%- game.author %></p>
+      </header>
+    
+   
+  </div>
+</article>
+
+
+
+   <%});%> 

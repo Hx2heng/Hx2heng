@@ -1,0 +1,38 @@
+
+
+<article class="article article-type-post animated slideInDown" >
+  
+    <div class="article-meta">
+  	<time class="article-date"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <%= data.createDate %> <%= data.createTime %></time>
+
+    </div>
+  
+  <div class="article-inner">
+      <header class="article-header">
+    <h1>
+    <% if(isConcrete){%>
+       <p class="article-title"><%- data.title %></p>
+    <%}else{%>
+      <a class="article-title" href="/article/article?id=<%- data._id %>"><%- data.title %></a>
+      <%}%>
+    </h1>
+    <p class="article-tags">
+   <% for(var i=0;i<data.tags.length;i++){ %>
+        <label data-type="<%=data.tags[i]%>"><%=data.tags[i]%></label>
+    
+    <% }%>
+    </p>
+  <p class="article-info">From:<%- data.author %></p>
+      </header>
+    <div class="article-entry">
+       <div class="markdown-body">
+      <%- data.content %>
+    </div>
+    </div>
+    <div class="article-info article-info-index">
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+

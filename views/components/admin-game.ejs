@@ -1,0 +1,51 @@
+<div class="admin-list table-responsive animated slideInDown">
+<div class="col-md-2 col-md-offset-10">
+  <button type="button"  class="btn btn-success btn-block btn-create">新建</button>
+  </div>
+    <table class="table">
+      <caption>已发布游戏</caption>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>游戏名</th>
+          <th>发布日期</th>
+          <th>作者</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+</div>
+
+<div class="admin-form">
+<form method="post" action="createGame">
+     <div class="form-group">
+    <label for="gameTitle">游戏名</label>
+    <input type="text" class="form-control" id="gameTitle" name="gameTitle" placeholder="标题" required>
+    
+  </div>
+  <div class="form-group">
+    <label for="gameUrl">游戏链接</label>
+    <input type="text" class="form-control" id="gameUrl" name="gameUrl" placeholder="游戏链接">
+  </div>
+  <div class="form-group">
+    <label for="gameContent">游戏介绍</label>
+   <textarea data-provide="markdown" class="form-control" rows="23" id="gameContent" name="gameContent" placeholder=" 游戏介绍" required></textarea>
+  </div>
+  <p class="text-center"></p>
+  <div class="col-md-2 col-md-offset-8">
+  <button type="button" class="btn btn-warning btn-block btn-cancle">取消</button>
+  </div>
+  <div class="col-md-2 ">
+ <button type="submit" data-loading-text="提交中..." class="btn btn-success btn-block btn-submit" autocomplete="off">提交</button>
+  
+  </div>
+</form>
+</div>
+
+
+
+
+
+

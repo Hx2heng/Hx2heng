@@ -1,0 +1,24 @@
+.tag-select {
+    width: 100%;
+    padding: 20px;
+    background-color: white;
+    margin-bottom: 10px;
+    a {
+        position: relative;
+        margin: 0 10px 0 0;
+        display: inline-block;
+        border: 1px solid #dcdcdc;
+        padding: 0 10px;
+        border-radius: 4px;
+        overflow: hidden;
+        font-weight: normal;
+        margin-top: 3px;
+        color: #909090;
+    }
+    a:hover,
+    a.active {
+        color: white;
+        background-color: $yellow;
+        border-color: white;
+    }
+}
