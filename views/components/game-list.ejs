@@ -1,6 +1,7 @@
+  <div class="game-list">
   <% games.map(function(game){%>
 
-<article class="article animated slideInDown game-only-list" >
+<article class="article animated slideInDown game-only-list article-game" >
   
     <div class="article-meta">
   	<time class="article-date"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <%= game.createDate %> <%= game.createTime %></time>
@@ -22,3 +23,4 @@
 
 
    <%});%> 
+   </div>

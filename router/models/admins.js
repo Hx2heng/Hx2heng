@@ -1,5 +1,5 @@
 import { AdminModel } from '../lib/mongo';
-
+import extend from 'extend';
 const admins = {
     //根据用户名获取用户对象
     getAdminByName: (name) => {
@@ -20,15 +20,21 @@ const admins = {
             if (admin) {
                 query.name = admin;
             }
-            AdminModel.find(query, (err, models) => {
+            AdminModel.find(query, 'articleTags', (err, models) => {
                 if (err) {
                     reject(err);
                     return;
                 }
                 if (models.length == 1) {
                     resolve(models[0].articleTags);
+                    return;
+                } else {
+                    let tags = [];
+                    models.map((item) => {
+                        tags = extend(tags, item.articleTags);
+                    })
+                    resolve(tags);
                 }
-                resolve(models);
             });
         })
     },
