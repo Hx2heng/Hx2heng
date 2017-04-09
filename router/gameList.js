@@ -12,8 +12,6 @@ router.get('/', (req, res) => {
         })
         res.render('gameList', { games: data });
     })
-
-
 })
 
 

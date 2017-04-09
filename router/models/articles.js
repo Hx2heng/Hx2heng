@@ -15,10 +15,10 @@ const articles = {
         })
     },
     //查询所有文章/查询某个用户所有文章（如果有传参数name）
-    findAllArticles: (name) => {
+    findAllArticles: (name = 'all', limit = null, skip = 0) => {
         return new Promise((resolve, reject) => {
             let query = {};
-            if (name) {
+            if (name && name != 'all') {
                 query.author = name;
             }
             ArticleModel.find(query, null, { sort: { '_id': -1 } }, (err, articles) => {
@@ -27,7 +27,7 @@ const articles = {
                     return;
                 }
                 resolve(articles)
-            });
+            }).limit(limit).skip(skip);
 
 
         })
@@ -94,7 +94,7 @@ const articles = {
         })
     },
     //根据标签查找所有文章
-    findAllArticlesByTags: (type) => {
+    findAllArticlesByTags: (type, limit = null, skip = 0) => {
         return new Promise((resolve, reject) => {
             if (!type) {
                 reject('找不到标签');
@@ -109,7 +109,7 @@ const articles = {
                     return;
                 }
                 resolve(articles)
-            });
+            }).limit(limit).skip(skip);
         })
     },
 }

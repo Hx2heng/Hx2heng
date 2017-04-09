@@ -1,10 +1,11 @@
   <div class="article-list">
   <% articles.map(function(article){%>
 
-<article class="article article-type-post animated slideInDown article-only-list" >
+<article class="article article-type-post animated fadeInUp article-only-list" >
   
     <div class="article-meta">
-  	<time class="article-date"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <%= article.createDate %> <%= article.createTime %></time>
+    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+  	<time class="article-date"> <%= article.createDate %> <%= article.createTime %></time>
 
     </div>
   

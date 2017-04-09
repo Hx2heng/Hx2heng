@@ -1,0 +1,29 @@
+@import './global.scss';
+@import './lib/animated.css';
+@import './lib/markdown/markdown.css';
+@import './components/nav.scss';
+@import './components/artListItem.scss';
+.article-header:hover {
+    box-shadow: none;
+    margin-bottom: 0;
+    transform: none
+}
+
+.article-title {
+    margin-bottom: 0;
+}
+
+.article-title:hover {
+    color: $yellow;
+    text-decoration: none;
+}
+
+.article-header {
+    border: none
+}
+
+.iframe-area {
+    margin: 20px auto 60px;
+    width: 320px;
+    text-align: center;
+}

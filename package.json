@@ -62,6 +62,7 @@
     "cookie-parser": "1.4.3",
     "ejs": "2.5.6",
     "express": "4.14.1",
+    "express-limiter": "^1.6.0",
     "express-session": "1.15.1",
     "jquery": "3.2.0",
     "marked": "^0.3.6",

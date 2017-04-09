@@ -14,6 +14,7 @@ router.get('/:id', (req, res) => {
     GamesModel.findGameById(id).then((game) => {
         game.content = marked(game.content);
         res.render('content', {
+            title: game.title,
             type: 'game',
             data: game,
             isConcrete: true

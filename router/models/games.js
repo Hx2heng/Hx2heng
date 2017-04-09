@@ -15,10 +15,10 @@ const games = {
         })
     },
     //查询所有游戏/查询某个用户所有游戏（如果有传参数name）
-    findAllGames: (name) => {
+    findAllGames: (name = 'all', limit = null, skip = 0) => {
         return new Promise((resolve, reject) => {
             let query = {};
-            if (name) {
+            if (name && name != 'all') {
                 query.author = name;
             }
             GameModel.find(query, null, { sort: { '_id': -1 } }, (err, games) => {
@@ -27,7 +27,7 @@ const games = {
                     return;
                 }
                 resolve(games)
-            });
+            }).limit(limit).skip(skip);
 
 
         })

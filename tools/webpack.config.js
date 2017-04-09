@@ -14,6 +14,8 @@ let config = {
     entry: {
         index: [bootstrapLoader, './index.js'],
         content: [bootstrapLoader, './content.js'],
+        artList: [bootstrapLoader, './artList.js'],
+        gameList: [bootstrapLoader, './gameList.js'],
         admin: [bootstrapLoader, './admin.js'],
     },
     node: {

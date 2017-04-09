@@ -3,8 +3,9 @@
 <article class="article article-type-post animated slideInDown" >
   
     <div class="article-meta">
-  	<time class="article-date"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <%= data.createDate %> <%= data.createTime %></time>
+    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 
+  	<time class="article-date"> <%= data.createDate %> <%= data.createTime %></time>
     </div>
   
   <div class="article-inner">
@@ -22,7 +23,7 @@
     
     <% }%>
     </p>
-  <p class="article-info">From:<%- data.author %></p>
+  <p class="article-info article-author">From:<%- data.author %></p>
       </header>
     <div class="article-entry">
        <div class="markdown-body">

@@ -11,15 +11,15 @@ router.use((req, res, next) => {
     next();
 })
 router.get('/', checkLogin, (req, res) => {
-    res.render('admin', { type: 'banner' });
+    res.render('admin', { type: 'banner', admin: req.session.admin.name });
 })
 router.get('/admin-article', checkLogin, (req, res) => {
 
-    res.render('admin', { type: 'admin-article' });
+    res.render('admin', { type: 'admin-article', admin: req.session.admin.name });
 })
 router.get('/admin-game', checkLogin, (req, res) => {
 
-    res.render('admin', { type: 'admin-game' });
+    res.render('admin', { type: 'admin-game', admin: req.session.admin.name });
 })
 
 
