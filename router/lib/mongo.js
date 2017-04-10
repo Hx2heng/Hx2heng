@@ -40,4 +40,16 @@ var GameSchema = new mongoose.Schema({
     updateDate: String
 })
 var GameModel = db.model('games', GameSchema);
-export { AdminModel, ArticleModel, GameModel }
+//工具
+var ToolSchema = new mongoose.Schema({
+    title: String,
+    url: String,
+    author: String,
+    type: String,
+    pv: Number,
+    createDate: String,
+    createTime: String,
+    updateDate: String
+})
+var ToolModel = db.model('tools', ToolSchema);
+export { AdminModel, ArticleModel, GameModel, ToolModel }

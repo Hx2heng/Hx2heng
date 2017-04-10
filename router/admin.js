@@ -3,6 +3,7 @@ import { checkLogin, checkNotLogin } from './middlewares/check.js'
 import AdminsModel from './models/admins'
 import ArticlesModel from './models/articles'
 import GamesModel from './models/games'
+import ToolsModel from './models/tools'
 import moment from 'moment'
 
 let router = express.Router();
@@ -21,7 +22,10 @@ router.get('/admin-game', checkLogin, (req, res) => {
 
     res.render('admin', { type: 'admin-game', admin: req.session.admin.name });
 })
+router.get('/admin-tool', checkLogin, (req, res) => {
 
+    res.render('admin', { type: 'admin-tool', admin: req.session.admin.name });
+})
 
 //根据当前用户用户查询所有文章
 router.get('/getAllArticles', checkLogin, (req, res) => {
@@ -201,7 +205,7 @@ router.get('/delArtcleTag', checkLogin, (req, res) => {
 
 
 
-//发表游戏页
+//发表游戏页-------------------------------
 router.post('/createGame', checkLogin, (req, res) => {
     var title = req.body.gameTitle;
     var content = req.body.gameContent;
@@ -309,4 +313,118 @@ router.post('/updateGame/:id', checkLogin, (req, res) => {
 
 })
 
+
+
+
+
+//发表工具页-------------------------------
+router.post('/createTool', checkLogin, (req, res) => {
+    var title = req.body.toolTitle;
+    var type = req.body.toolType;
+    var toolUrl = req.body.toolUrl;
+    // console.log(gameBgImg);
+    // 校验参数
+    try {
+        if (!title.length) {
+            throw new Error('请填写标题');
+        }
+        if (!toolUrl.length) {
+            throw new Error('请填写链接');
+        }
+    } catch (e) {
+        req.flash('error', e.message);
+        return res.redirect('back');
+    }
+    var tool = {
+        title: title,
+        type: type,
+        url: toolUrl,
+        author: req.session.admin.name,
+        pv: 0,
+        createDate: moment().format('YYYY/M/D'),
+        createTime: moment().format('HH:mm')
+    }
+    console.log('fuck ', tool);
+    //上传工具
+    ToolsModel.createTools(tool).then((message) => {
+        req.flash('success', message);
+        return res.redirect('back');
+    }).catch((err) => {
+        return res.status(403).send(err)
+    })
+
+})
+
+//根据当前用户用户查询所有工具
+router.get('/getAllTools', checkLogin, (req, res) => {
+        ToolsModel.findAllTools(req.session.admin.name).then((tools) => {
+            return res.json(tools);
+        });
+    })
+    //根据id查询某个工具
+router.get('/getToolById', checkLogin, (req, res) => {
+        let id = req.query.id;
+        if (!id) {
+            req.flash('error', '参数错误');
+            return res.redirect('back');
+        }
+        ToolsModel.findToolById(id).then((tool) => {
+            return res.json(tool);
+        }).catch((err) => {
+            return res.status(404).end(err);
+        });
+    })
+    //根据id删除某个文章
+router.get('/deleteToolById', checkLogin, (req, res) => {
+    let id = req.query.id;
+    if (!id) {
+        req.flash('error', '参数错误');
+        return res.redirect('back');
+    }
+    ToolsModel.deleteToolById(id).then((message) => {
+        req.flash('success', message);
+        return res.send(message);
+    }).catch((err) => {
+        return res.status(403).send(err)
+    });
+})
+
+//根据id修改某个工具
+router.post('/updateTool/:id', checkLogin, (req, res) => {
+    var title = req.body.toolTitle;
+    var url = req.body.toolUrl;
+    var type = req.body.toolType;
+    var id = req.params.id;
+
+    // 校验参数
+    try {
+        if (!title.length) {
+            throw new Error('请填写标题');
+        }
+        if (!type.length) {
+            throw new Error('请填写链接');
+        }
+    } catch (e) {
+        req.flash('error', e.message);
+        return res.redirect('back');
+    }
+
+    var newTool = {
+        _id: id,
+        title: title,
+        type: type,
+        url: url
+    }
+
+    ToolsModel.updateOneTool(newTool).then((message) => {
+        req.flash('success', message);
+        return res.redirect('back');
+    }).catch((err) => {
+        return res.status(403).send(err)
+
+    })
+
+
+
+})
 export default router

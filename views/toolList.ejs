@@ -1,0 +1,24 @@
+<%- include('layouts/header',{styles:['index']}) %>
+
+
+    <div class="col-md-8 col-md-offset-2 content">
+        <div class="panel panel-success">
+          
+
+            <div class="panel-heading">页面生成</div>
+            <div class="panel-body">
+               <div class="btn-group" role="group" aria-label="...">
+               <% tools.map(function(tool){%>
+            <a type="button" class="btn btn-default" href="/tool/tool?id=<%=tool._id %>"><%=tool.title %></a>
+          <%});%>
+                    
+                   
+            </div>
+        </div>
+    </div>
+
+    </div>
+ <%- include('./components/scrollToTop') %>
+<%- include('layouts/footer') %>
+<script src="js/gameList.bundle.js"></script>
+

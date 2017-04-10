@@ -19,6 +19,16 @@
     text-indent: -9999px;
     box-shadow: 0 0 5px #DDD;
     border-radius: 36px;
+    transition: all ease 1s;
+    &.active {
+        transform: scale(.65)
+    }
+    &.disabled {
+        transform: scale(.65)
+    }
+    &.disabled.active {
+        transform: scale(1)
+    }
 }
 
 .socialShare .msb_main:hover {

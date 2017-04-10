@@ -43,17 +43,17 @@
         });
         $(document).on("click", ".msb_main", function() {
             if ($(this).hasClass("disabled")) return;
-            var e = 500; //动画时间
-            var t = 250; //延迟时间
+            var e = 400; //动画时间
+            var t = 30; //延迟时间
             var r = $(this).parent().find(".msb_network_button").length; //分享组件的个数
-            var i = 60;
+            var i = 50;
             var s = e + (r - 1) * t;
             var o = 1;
             var a = $(this).outerWidth();
             var f = $(this).outerHeight();
             var c = $(this).parent().find(".msb_network_button:eq(0)").outerWidth();
             var h = $(this).parent().find(".msb_network_button:eq(0)").outerHeight();
-            var p = (a - c) / 2; //起始位置
+            var p = (a - c) / 10; //起始位置
             var d = (f - h) / 2; //起始位置
             var v = 0 / 180 * Math.PI;
             if (!$(this).hasClass("active")) {
@@ -189,6 +189,8 @@
     var tqq = 'http://share.v.t.qq.com/index.php?c=share&a=index&url={url}&title={title}&appkey=801cf76d3cfc44ada52ec13114e84a96';
     var douban = 'http://www.douban.com/share/service?href={url}&name={title}&text={content}&image={pic}';
     var weixin = 'http://qr.liantu.com/api.php?text={url}';
+
+
 
 
 })(jQuery, window, document);

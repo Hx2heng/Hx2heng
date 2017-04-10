@@ -319,4 +319,112 @@ window.onload = () => {
 
     }
 
+
+    //  --------------------------------------------------------------------------------------------工具管理页
+    if ($('.admin-tool').get(0)) {
+        //获取工具列表到dom
+        function getAllDataToTable() {
+            $('.admin-list').find('tbody').empty();
+            $.ajax({
+                url: 'getAllTools',
+                type: 'get',
+                success: (res) => {
+                    var tools = res;
+                    tools.map((item, i) => {
+                        //日后改模板引擎法
+                        var tr = $('<tr><th scope="row">' + (i + 1) + '</th><td>' + item.title + '</td><td>' + item.type + '</td><td>' + item.author + '</td><td>' + item.createDate + '</td><td><button type="button" data-target="' + item._id + '" class="btn btn-info btn-xs btn-edit">编辑</button> <button type="button" data-target="' + item._id + '" class="btn btn-danger btn-xs btn-delete">删除</button></td></tr>')
+                        $('.admin-list').find('tbody').append(tr);
+                    })
+                }
+            })
+        }
+        getAllDataToTable();
+        //编辑工具
+        $('.admin-list').on('click', '.btn-edit', function() {
+            var toolId = $(this).attr('data-target');
+            $.ajax({
+                url: 'getToolById',
+                type: 'get',
+                data: { id: toolId },
+                success: (res) => {
+                    console.log(res);
+                    if (!res) {
+                        return false;
+                    }
+                    $('.admin-list').hide();
+                    $('.admin-form').fadeIn();
+                    $('.admin-form').find('form').attr('action', 'updateTool/' + res._id);
+
+                    insertEditor(res.title, res.type, res.url);
+                },
+                error: (err) => {
+                    console.log(err.responseText);
+                }
+            })
+        })
+
+        //删除文章
+        $('.admin-list').on('click', '.btn-delete', function() {
+            var r = confirm("确定删除这个工具吗？");
+            if (r == true) {
+                var toolId = $(this).attr('data-target');
+                $.ajax({
+                    url: 'deleteToolById',
+                    type: 'get',
+                    data: { id: toolId },
+                    success: (res) => {
+                        getAllDataToTable();
+                    }
+                })
+            } else {
+                return false
+            }
+
+        })
+
+
+        //清空编辑器
+        function clearEditor() {
+            $('#gameContent').val('');
+            $('#gameTitle').val('');
+            $('#gameUrl').val('');
+            $('#gameBgImgText').val('');
+            $('#pre-gameBgImg').attr('src', '');
+        }
+
+        //插入内容到编辑器
+        function insertEditor(title, type, url) {
+            clearEditor();
+            $('#toolTitle').val(title);
+            $('#toolType').val(type);
+            $('#toolUrl').val(url);
+
+        }
+
+        //文本编辑框初始化-
+        $('#articleContent').markdown({ autofocus: false, savable: false });
+
+        //新建
+        $('.btn-create').on('click', function() {
+                clearEditor();
+                $('.admin-list').hide();
+                $('.admin-form').show();
+            })
+            //提交
+        $('.admin-form').on('submit', function() {
+                var $btn = $('.btn-submit').button('loading');
+            })
+            //取消发布
+        $('.btn-cancle').on('click', function() {
+            clearEditor();
+            $('.admin-form').hide();
+            $('.admin-list').show();
+            $('.admin-form').find('form').attr('action', 'createGame');
+        })
+
+    }
+
+
+
+
 }
