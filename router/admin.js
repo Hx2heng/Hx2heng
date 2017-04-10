@@ -118,8 +118,8 @@ router.post('/updateArticle/:id', checkLogin, (req, res) => {
 router.post('/createArticle', checkLogin, (req, res) => {
         var title = req.body.articleTitle;
         var content = req.body.articleContent;
-        var tags = [];
 
+        var tags = [];
         console.log(req.body);
         // 校验参数
         try {
@@ -206,7 +206,8 @@ router.post('/createGame', checkLogin, (req, res) => {
     var title = req.body.gameTitle;
     var content = req.body.gameContent;
     var url = req.body.gameUrl;
-    console.log(title, content, url);
+    var gameBgImg = req.body.gameBgImg;
+    // console.log(gameBgImg);
     // 校验参数
     try {
         if (!title.length) {
@@ -221,6 +222,7 @@ router.post('/createGame', checkLogin, (req, res) => {
             content: content,
             url: url,
             author: req.session.admin.name,
+            bgImg: gameBgImg,
             pv: 0,
             createDate: moment().format('YYYY/M/D'),
             createTime: moment().format('HH:mm')
@@ -269,11 +271,12 @@ router.get('/deleteGameById', checkLogin, (req, res) => {
     });
 })
 
-//根据id修改某篇文章
+//根据id修改某个游戏
 router.post('/updateGame/:id', checkLogin, (req, res) => {
     var title = req.body.gameTitle;
     var content = req.body.gameContent;
     var url = req.body.gameUrl;
+    var gameBgImg = req.body.gameBgImg;
     var id = req.params.id;
 
     // 校验参数
@@ -290,6 +293,7 @@ router.post('/updateGame/:id', checkLogin, (req, res) => {
         _id: id,
         title: title,
         content: content,
+        bgImg: gameBgImg,
         url: url
     }
 

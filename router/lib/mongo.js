@@ -34,6 +34,7 @@ var GameSchema = new mongoose.Schema({
     url: String,
     author: String,
     pv: Number,
+    bgImg: String,
     createDate: String,
     createTime: String,
     updateDate: String

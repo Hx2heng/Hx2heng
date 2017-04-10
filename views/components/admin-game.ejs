@@ -30,6 +30,13 @@
     <input type="text" class="form-control" id="gameUrl" name="gameUrl" placeholder="游戏链接">
   </div>
   <div class="form-group">
+    <label for="gameBgImg">游戏背景图片:</label>
+    <input type="file" id="gameBgImg" accept="image/*">
+    <input type="text" id="gameBgImgText" name="gameBgImg" style="display:none;">
+    <img src=""  class="img-thumbnail" id="pre-gameBgImg">
+    <a class="btn btn-default btn-sm btn-danger" href="javascript:" role="button">删除</a>
+  </div>
+  <div class="form-group">
     <label for="gameContent">游戏介绍</label>
    <textarea data-provide="markdown" class="form-control" rows="23" id="gameContent" name="gameContent" placeholder=" 游戏介绍" required></textarea>
   </div>

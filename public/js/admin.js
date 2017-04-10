@@ -217,7 +217,7 @@ window.onload = () => {
                     $('.admin-form').fadeIn();
                     $('.admin-form').find('form').attr('action', 'updateGame/' + res._id);
 
-                    insertEditor(res.title, res.content, res.url);
+                    insertEditor(res.title, res.content, res.url, res.bgImg);
                 },
                 error: (err) => {
                     console.log(err.responseText);
@@ -250,14 +250,18 @@ window.onload = () => {
             $('#gameContent').val('');
             $('#gameTitle').val('');
             $('#gameUrl').val('');
+            $('#gameBgImgText').val('');
+            $('#pre-gameBgImg').attr('src', '');
         }
 
         //插入内容到编辑器
-        function insertEditor(title, content, url) {
+        function insertEditor(title, content, url, bgImg) {
             clearEditor();
             $('#gameTitle').val(title);
             $('#gameContent').val(content);
             $('#gameUrl').val(url);
+            $('#gameBgImgText').val(bgImg);
+            $('#pre-gameBgImg').attr('src', bgImg);
 
         }
 
@@ -280,6 +284,36 @@ window.onload = () => {
             $('.admin-form').hide();
             $('.admin-list').show();
             $('.admin-form').find('form').attr('action', 'createGame');
+        })
+
+        //图片文件
+        $('#gameBgImg').on('change', function(e) {
+            //通过input files添加图片
+            var _this = this,
+                files = this.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var imageType = /image.*/;
+                //通过type属性进行图片格式过滤 
+                var type = file.type.split("/")[1];
+
+                if (!file.type.match(imageType)) {
+                    alert('请选择图片');
+                    continue;
+                }
+                if (file.size > 1024 * 1024) {
+                    alert("你上传的文件太大了！请重新选择");
+                    continue;
+                }
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.type = type;
+                reader.onload = function(e) {
+                    //e.target.result返回的即是图片的dataURI格式的内容 
+                    $('#pre-gameBgImg').attr('src', e.target.result);
+                    $('#gameBgImgText').val(e.target.result);
+                }
+            }
         })
 
 

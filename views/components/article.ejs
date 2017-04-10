@@ -18,12 +18,12 @@
       <%}%>
     </h1>
     <p class="article-tags">
+  <span class="article-info article-author"><%- data.author %> | </span>
    <% for(var i=0;i<data.tags.length;i++){ %>
         <label data-type="<%=data.tags[i]%>"><%=data.tags[i]%></label>
     
     <% }%>
     </p>
-  <p class="article-info article-author">From:<%- data.author %></p>
       </header>
     <div class="article-entry">
        <div class="markdown-body">
@@ -31,6 +31,7 @@
     </div>
     </div>
     <div class="article-info article-info-index">
+    <div class="socialShare"></div>
       <div class="clearfix"></div>
     </div>
   </div>

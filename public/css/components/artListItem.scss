@@ -63,7 +63,7 @@
 }
 
 .article-info-index.article-info {
-    padding-top: 20px;
+    padding-top: 10px;
     margin: 30px 30px 0 30px;
     border-top: 1px solid #ddd;
 }
@@ -114,6 +114,9 @@ label[data-type="game"] {
 // }
 .article-game {
     .article-header {
-        border-color: #ff6e6e;
+        border-color: #28d7ff;
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        background-position-x: 100%;
     }
 }

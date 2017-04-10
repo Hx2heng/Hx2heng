@@ -1,6 +1,6 @@
 import './components/nav';
 import '../css/list.scss';
-
+import './components/scrollToTop';
 window.onload = () => {
     //滚动加载
     var skip = 10,

@@ -8,7 +8,7 @@
         .information {
             position: fixed;
             height: 100%;
-            padding-bottom: 80px;
+            padding: 0 0 80px;
             background-color: $black;
             overflow-y: scroll;
             .admin-information {
@@ -29,10 +29,40 @@
                     background-image: url(../images/head.jpg);
                     background-size: cover;
                     background-position: center;
-                    border: 4px solid $grey
+                    border: 4px solid $grey;
+                    &:hover {
+                        animation: pulse 1s ease;
+                    }
                 }
                 .admin-description {
                     color: #8f8f8f
+                }
+            }
+            .social {
+                display: flex;
+                margin-right: 15px;
+                margin-top: 10px;
+                text-align: center;
+                justify-content: center;
+                a {
+                    border-radius: 50%;
+                    vertical-align: middle;
+                    zoom: 1;
+                    text-indent: -9999px;
+                    margin: 0 8px 15px 8px;
+                    opacity: 0.7;
+                    width: 28px;
+                    height: 28px;
+                    transition: 0.3s;
+                    &:hover {
+                        animation: jello 1s ease;
+                    }
+                }
+                .github {
+                    background: url(../images/github.png) center no-repeat #464646;
+                }
+                .weibo {
+                    background: url(../images/weibo.png) center no-repeat #ff6262;
                 }
             }
         }

@@ -15,11 +15,12 @@
       <a class="article-title" href="/article/article?id=<%- article._id %>"><%- article.title %></a>
     </h1>
     <p class="article-tags">
+     <span class="article-info article-author"><%- article.author %> | </span>
    <% for(var i=0;i<article.tags.length;i++){ %>
         <label for="" data-type="<%=article.tags[i]%>"><%=article.tags[i]%></label>
     <% }%>
     </p>
-  <p class="article-info">From:<%- article.author %></p>
+  
       </header>
     
    

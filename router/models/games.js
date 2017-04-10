@@ -83,6 +83,7 @@ const games = {
                 game.title = newGame.title;
                 game.content = newGame.content;
                 game.url = newGame.url;
+                game.bgImg = newGame.bgImg;
                 game.save((err) => {
                     if (err) {
                         reject(err);

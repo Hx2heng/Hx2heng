@@ -24,6 +24,12 @@ let router = (app) => {
 
     app.use('/admin', admin); //用户后台
     app.use('/signin', signin); //用户登录
+
+    app.use(function(req, res) {
+        if (!res.headersSent) {
+            res.status(404).render('404');
+        }
+    });
 }
 
 export default router

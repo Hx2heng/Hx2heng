@@ -2,7 +2,7 @@ import express from 'express'
 import ArticlesModel from './models/articles'
 import GamesModel from './models/games'
 import marked from 'marked'
-import limiter from 'express-limiter'
+
 let router = express.Router();
 
 router.use((req, res, next) => {

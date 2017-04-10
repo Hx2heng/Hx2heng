@@ -38,7 +38,7 @@ let appPro = async() => {
         //使用flash中间件用来显示通知
         app.use(flash());
 
-        global.testData = serverCfg.testData;
+
 
         // 添加模板变量
         app.use(function(req, res, next) {
@@ -47,12 +47,16 @@ let appPro = async() => {
             next();
         });
 
-        app.use(bodyParser.json()); // for parsing application/json
-        app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+        //限制上传文件大小
+        app.use(bodyParser.json({ 'limit': '1000kb' })); // for parsing application/json
+        app.use(bodyParser.urlencoded({ extended: true, 'limit': '1000kb' })); // for parsing application/x-www-form-urlencoded
         //app.use(multer()); // for parsing multipart/form-data
 
         //启动路由
         router(app);
+
+
+        app.use(bodyParser.json());
 
         //启动服务 
         await runServer(app);

@@ -53,7 +53,7 @@ body {
 footer {
     width: 100%;
     height: 20px;
-    background-color: #33363d;
+    background-color: #101010;
     margin-top: 40px;
 }
 
@@ -90,4 +90,25 @@ a:hover {
     border-radius: 3px;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
     background-color: $yellow;
+}
+
+//scroll-to-top
+.scroll-to-top {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    position: fixed;
+    bottom: 100px;
+    right: 50px;
+    background-color: $black;
+    color: $yellow;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    opacity: .5;
+    transition: opacity .5s ease;
+    &:hover {
+        opacity: 1;
+    }
 }
