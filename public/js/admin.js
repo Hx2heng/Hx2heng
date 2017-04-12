@@ -330,6 +330,7 @@ window.onload = () => {
                 type: 'get',
                 success: (res) => {
                     var tools = res;
+                    console.log(res);
                     tools.map((item, i) => {
                         //日后改模板引擎法
                         var tr = $('<tr><th scope="row">' + (i + 1) + '</th><td>' + item.title + '</td><td>' + item.type + '</td><td>' + item.author + '</td><td>' + item.createDate + '</td><td><button type="button" data-target="' + item._id + '" class="btn btn-info btn-xs btn-edit">编辑</button> <button type="button" data-target="' + item._id + '" class="btn btn-danger btn-xs btn-delete">删除</button></td></tr>')
@@ -347,7 +348,6 @@ window.onload = () => {
                 type: 'get',
                 data: { id: toolId },
                 success: (res) => {
-                    console.log(res);
                     if (!res) {
                         return false;
                     }
@@ -355,7 +355,7 @@ window.onload = () => {
                     $('.admin-form').fadeIn();
                     $('.admin-form').find('form').attr('action', 'updateTool/' + res._id);
 
-                    insertEditor(res.title, res.type, res.url);
+                    insertEditor(res.title, res.type, res.url, res.content);
                 },
                 error: (err) => {
                     console.log(err.responseText);
@@ -363,7 +363,7 @@ window.onload = () => {
             })
         })
 
-        //删除文章
+        //删除工具
         $('.admin-list').on('click', '.btn-delete', function() {
             var r = confirm("确定删除这个工具吗？");
             if (r == true) {
@@ -385,20 +385,32 @@ window.onload = () => {
 
         //清空编辑器
         function clearEditor() {
-            $('#gameContent').val('');
-            $('#gameTitle').val('');
-            $('#gameUrl').val('');
-            $('#gameBgImgText').val('');
-            $('#pre-gameBgImg').attr('src', '');
+            $('#toolTitle').val('');
+            $("input[name='toolType']").removeAttr("checked");
+            $('#toolUrl').val('');
+            $('#toolContent').val('');
         }
+        //文本域控制
+        $("input[name='toolType']").on('change', function() {
 
+            if ($("input[name='toolType']:checked").val() == '插件') {
+                $('.content-editor').show();
+            } else {
+                $('.content-editor').hide();
+            }
+        });
         //插入内容到编辑器
-        function insertEditor(title, type, url) {
+        function insertEditor(title, type, url, content) {
             clearEditor();
             $('#toolTitle').val(title);
-            $('#toolType').val(type);
+            $("input[name='toolType'][value='" + type + "']").attr("checked", true);
             $('#toolUrl').val(url);
-
+            $('#toolContent').val(content);
+            if ($("input[name='toolType']:checked").val() == '插件') {
+                $('.content-editor').show();
+            } else {
+                $('.content-editor').hide();
+            }
         }
 
         //文本编辑框初始化-

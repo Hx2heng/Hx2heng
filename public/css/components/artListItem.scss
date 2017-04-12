@@ -1,6 +1,6 @@
 .article {
     position: relative;
-    @include boxShadow;
+    display: block;
     background-color: #fff;
     -webkit-transition: all 0.2s ease-in;
 }
@@ -23,22 +23,35 @@
     margin-bottom: 10px;
 }
 
+.article-header-bg {
+    width: 80px;
+    height: 80px;
+    background-size: cover;
+    background-position: center
+}
+
 .article-info {
     color: #aaa;
     margin: 0
 }
 
 .article-header {
+    display: flex;
+    align-items: center;
     border-left: 6px solid $yellow;
     padding: 4px 0px 15px 25px;
+    background-color: white;
     transition: all ease 0.3s;
-    background-color: white
 }
 
 .article-header:hover {
     box-shadow: 0 2px 20px #808080;
     margin-bottom: 20px;
     transform: scale(1.01)
+}
+
+.article-header-content {
+    flex-grow: 1;
 }
 
 .article-title {
@@ -113,10 +126,30 @@ label[data-type="game"] {
 //     }
 // }
 .article-game {
+    .article {
+        margin: 0 -10px;
+    }
     .article-header {
         border-color: #28d7ff;
-        background-size: auto 100%;
-        background-repeat: no-repeat;
-        background-position-x: 100%;
+        padding: 0;
+        .article-header-content {
+            padding-left: 20px;
+            .article-title {
+                font-size: 18px;
+                line-height: 8px;
+                margin-bottom: 2px;
+            }
+            .article-info {
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+//tools
+.panel {
+    margin-bottom: 0;
+    a.tool-btn {
+        margin-bottom: 10px !important;
     }
 }

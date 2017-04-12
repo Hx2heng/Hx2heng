@@ -1,53 +1,58 @@
 <div class="admin-list table-responsive animated slideInDown">
-<div class="col-md-2 col-md-offset-10">
-  <button type="button"  class="btn btn-success btn-block btn-create">新建</button>
-  </div>
+    <div class="col-md-2 col-md-offset-10">
+        <button type="button" class="btn btn-success btn-block btn-create">新建</button>
+    </div>
     <table class="table">
-      <caption>已发布工具</caption>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>工具名</th>
-          <th>类型</th>
-          <th>作者</th>
-          <th>发布日期</th>
-          <th>操作</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
+        <caption>已发布工具</caption>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>工具名</th>
+                <th>类型</th>
+                <th>作者</th>
+                <th>发布日期</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
     </table>
 </div>
 
 <div class="admin-form">
-<form method="post" action="createTool">
-     <div class="form-group">
-    <label for="toolTitle">工具名</label>
-    <input type="text" class="form-control" id="toolTitle" name="toolTitle" placeholder="标题" required>
-    
-  </div>
-  <div class="form-group">
-    <label for="toolType">工具类型</label>
-    <input type="text" class="form-control" id="toolType" name="toolType" placeholder="工具类型" >
-  </div>
-  <div class="form-group">
-    <label for="toolUrl">工具链接</label>
-    <input type="text" class="form-control" id="toolUrl" name="toolUrl" placeholder="工具链接" required>
-  </div>
+    <form method="post" action="createTool">
+        <div class="form-group">
+            <label>类型：</label>
+            <label class="radio-inline">
+              <input type="radio" name="toolType" id="inlineRadio1" value="插件" required> 插件
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="toolType" id="inlineRadio2" value="在线转换" required> 在线转换
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="toolType" id="inlineRadio3" value="外链" required> 外链
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="toolTitle">工具名</label>
+            <input type="text" class="form-control" id="toolTitle" name="toolTitle" placeholder="标题" required>
 
- 
-  <div class="col-md-2 col-md-offset-8">
-  <button type="button" class="btn btn-warning btn-block btn-cancle">取消</button>
-  </div>
-  <div class="col-md-2 ">
- <button type="submit" data-loading-text="提交中..." class="btn btn-success btn-block btn-submit" autocomplete="off">提交</button>
-  
-  </div>
-</form>
+        </div>
+        <div class="form-group">
+            <label for="toolUrl">工具链接</label>
+            <input type="text" class="form-control" id="toolUrl" name="toolUrl" placeholder="工具链接" required>
+        </div>
+        <div class="form-group content-editor">
+            <label for="toolContent">工具介绍</label>
+            <textarea data-provide="markdown" class="form-control" rows="23" id="toolContent" name="toolContent" placeholder=" 游戏介绍"></textarea>
+        </div>
+
+        <div class="col-md-2 col-md-offset-8">
+            <button type="button" class="btn btn-warning btn-block btn-cancle">取消</button>
+        </div>
+        <div class="col-md-2 ">
+            <button type="submit" data-loading-text="提交中..." class="btn btn-success btn-block btn-submit" autocomplete="off">提交</button>
+
+        </div>
+    </form>
 </div>
-
-
-
-
-
-

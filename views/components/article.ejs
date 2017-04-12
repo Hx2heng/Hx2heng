@@ -1,40 +1,42 @@
+<article class="article article-type-post animated slideInDown">
 
-
-<article class="article article-type-post animated slideInDown" >
-  
     <div class="article-meta">
-    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 
-  	<time class="article-date"> <%= data.createDate %> <%= data.createTime %></time>
+        <time class="article-date"> <%= data.createDate %> <%= data.createTime %></time>
     </div>
-  
-  <div class="article-inner">
-      <header class="article-header">
-    <h1>
-    <% if(isConcrete){%>
-       <p class="article-title"><%- data.title %></p>
-    <%}else{%>
-      <a class="article-title" href="/article/article?id=<%- data._id %>"><%- data.title %></a>
-      <%}%>
-    </h1>
-    <p class="article-tags">
-  <span class="article-info article-author"><%- data.author %> | </span>
-   <% for(var i=0;i<data.tags.length;i++){ %>
-        <label data-type="<%=data.tags[i]%>"><%=data.tags[i]%></label>
-    
-    <% }%>
-    </p>
-      </header>
-    <div class="article-entry">
-       <div class="markdown-body">
-      <%- data.content %>
+
+    <div class="article-inner">
+        <header class="article-header">
+            <div class="article-header-content">
+                <h1>
+                    <% if(isConcrete){%>
+                        <p class="article-title">
+                            <%- data.title %>
+                        </p>
+                        <%}else{%>
+                            <a class="article-title" href="/article/article?id=<%- data._id %>">
+                                <%- data.title %>
+                            </a>
+                            <%}%>
+                </h1>
+                <p class="article-tags">
+                    <span class="article-info article-author"><%- data.author %> | </span>
+                    <% for(var i=0;i<data.tags.length;i++){ %>
+                        <label data-type="<%=data.tags[i]%>"><%=data.tags[i]%></label>
+
+                        <% }%>
+                </p>
+            </div>
+        </header>
+        <div class="article-entry">
+            <div class="markdown-body">
+                <%- data.content %>
+            </div>
+        </div>
+        <div class="article-info article-info-index">
+            <div class="socialShare"></div>
+            <div class="clearfix"></div>
+        </div>
     </div>
-    </div>
-    <div class="article-info article-info-index">
-    <div class="socialShare"></div>
-      <div class="clearfix"></div>
-    </div>
-  </div>
 </article>
-
-

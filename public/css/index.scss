@@ -11,6 +11,11 @@
             padding: 0 0 80px;
             background-color: $black;
             overflow-y: scroll;
+            .game-list {
+                .article-meta {
+                    display: none;
+                }
+            }
             .admin-information {
                 width: 100%;
                 text-align: center;
@@ -95,6 +100,7 @@
             padding: 10px 0 10px 20px;
             background-color: white;
             @include boxShadow();
+            border-bottom: 1px solid #eee;
             p {
                 margin: 0
             }

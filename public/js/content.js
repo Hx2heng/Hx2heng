@@ -10,7 +10,4 @@ window.onload = () => {
         title: $('.article-title').html(),
 
     });
-
-    var ifm = document.getElementById("toolIframe");
-    toolIframe.height = document.documentElement.clientHeight;
 }

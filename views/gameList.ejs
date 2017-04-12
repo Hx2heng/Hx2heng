@@ -1,10 +1,12 @@
 <%- include('layouts/header',{styles:['index']}) %>
 
 
-    <div class="col-md-8 col-md-offset-2 content">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="list-top">
+            <p><span class="glyphicon glyphicon-knight" aria-hidden="true"></span> 全部游戏</p>
+        </div>
         <%- include('./components/game-list') %>
     </div>
- <%- include('./components/scrollToTop') %>
-<%- include('layouts/footer') %>
-<script src="js/gameList.bundle.js"></script>
-
+    <%- include('./components/scrollToTop') %>
+        <%- include('layouts/footer') %>
+            <script src="js/gameList.bundle.js"></script>

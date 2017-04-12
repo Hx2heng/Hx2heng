@@ -46,6 +46,7 @@ var ToolSchema = new mongoose.Schema({
     url: String,
     author: String,
     type: String,
+    content: String,
     pv: Number,
     createDate: String,
     createTime: String,

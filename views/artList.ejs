@@ -1,12 +1,14 @@
 <%- include('layouts/header',{styles:['index']}) %>
 
 
-    <div class="col-md-8 col-md-offset-2 content">
+    <div class="col-md-8 col-md-offset-2">
 
+        <div class="list-top">
+            <p><span class="glyphicon glyphicon-book" aria-hidden="true"></span> 文章</p>
+        </div>
         <%- include('./components/tags') %>
-        <%- include('./components/article-list') %>
+            <%- include('./components/article-list') %>
     </div>
- <%- include('./components/scrollToTop') %>
-<%- include('layouts/footer') %>
-<script src="js/artList.bundle.js"></script>
-
+    <%- include('./components/scrollToTop') %>
+        <%- include('layouts/footer') %>
+            <script src="js/artList.bundle.js"></script>

@@ -1,35 +1,37 @@
 <%- include('layouts/header',{styles:['admin']}) %>
-
-    <div class="col-md-6 col-md-offset-3 content animated fadeInUp">
-         <div class="col-md-12">
-         <div class="panel panel-default">
-  <div class="panel-heading">管理员登录</div>
-  <div class="panel-body">
-    <form method="post" action="/signin">
-  <div class="form-group">
-    <label for="name">账号</label>
-    <input type="text" class="form-control" name="name" value="<%=defaultNameValue%>" placeholder="账号" required>
-  </div>
-  <div class="form-group">
-    <label for="password">密码</label>
-    <input type="password" class="form-control" name="password" value="<%=defaultPasswordValue%>" placeholder="密码" required>
-  </div>
-  <div class="checkbox">
-  <label>
+    <%- include('./components/banner') %>
+        <div class="col-md-6 col-md-offset-3 content animated fadeInUp">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">管理员登录</div>
+                    <div class="panel-body">
+                        <form method="post" action="/signin">
+                            <div class="form-group">
+                                <label for="name">账号</label>
+                                <input type="text" class="form-control" name="name" value="<%=defaultNameValue%>" placeholder="账号" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">密码</label>
+                                <input type="password" class="form-control" name="password" value="<%=defaultPasswordValue%>" placeholder="密码" required>
+                            </div>
+                            <div class="checkbox">
+                                <label>
     <input type="checkbox" value="" name="isRemember">
     记住密码
   </label>
-</div>
-  <p class="text-center"><%= success %><%= error %></p>
-  <button type="submit" class="btn btn-info btn-block">登录</button>
-  <button type="submit" class="btn btn-info btn-block">注册</button>
-</form>
-  </div>
-</div>
-           
-         </div>
-    </div>
+                            </div>
+                            <p class="text-center">
+                                <%= success %>
+                                    <%= error %>
+                            </p>
+                            <button type="submit" class="btn btn-info btn-block">登录</button>
+                            <button type="submit" class="btn btn-info btn-block">注册</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
 
-<script src="/js/admin.bundle.js"></script>
-
+        <script src="/js/admin.bundle.js"></script>

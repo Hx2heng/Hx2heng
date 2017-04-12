@@ -1,34 +1,37 @@
-  <div class="article-list">
-  <% articles.map(function(article){%>
+<div class="article-list">
+    <% articles.map(function(article){%>
 
-<article class="article article-type-post animated fadeInUp article-only-list" >
-  
-    <div class="article-meta">
-    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-  	<time class="article-date"> <%= article.createDate %> <%= article.createTime %></time>
+        <article class="article article-type-post animated fadeInUp article-only-list">
 
-    </div>
-  
-  <div class="article-inner">
-      <header class="article-header">
-    <h1>
-      <a class="article-title" href="/article/article?id=<%- article._id %>"><%- article.title %></a>
-    </h1>
-    <p class="article-tags">
-     <span class="article-info article-author"><%- article.author %> | </span>
-   <% for(var i=0;i<article.tags.length;i++){ %>
-        <label for="" data-type="<%=article.tags[i]%>"><%=article.tags[i]%></label>
-    <% }%>
-    </p>
-  
-      </header>
-    
-   
-  </div>
-</article>
+            <div class="article-meta">
+                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                <time class="article-date"> <%= article.createDate %> <%= article.createTime %></time>
 
+            </div>
+
+            <div class="article-inner">
+                <header class="article-header">
+                    <div class="article-header-content">
+                        <h1>
+                            <a class="article-title" href="/article/article?id=<%- article._id %>">
+                                <%- article.title %>
+                            </a>
+                        </h1>
+                        <p class="article-tags">
+                            <span class="article-info article-author"><%- article.author %> | </span>
+                            <% for(var i=0;i<article.tags.length;i++){ %>
+                                <label for="" data-type="<%=article.tags[i]%>"><%=article.tags[i]%></label>
+                                <% }%>
+                        </p>
+                    </div>
+                </header>
 
 
-   <%});%> 
+            </div>
+        </article>
 
-   </div>
+
+
+        <%});%>
+
+</div>

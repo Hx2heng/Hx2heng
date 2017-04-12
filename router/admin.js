@@ -321,14 +321,18 @@ router.post('/updateGame/:id', checkLogin, (req, res) => {
 router.post('/createTool', checkLogin, (req, res) => {
     var title = req.body.toolTitle;
     var type = req.body.toolType;
-    var toolUrl = req.body.toolUrl;
+    var url = req.body.toolUrl;
+    var content = req.body.toolContent;
     // console.log(gameBgImg);
     // 校验参数
     try {
-        if (!title.length) {
-            throw new Error('请填写标题');
+        if (!type.length) {
+            throw new Error('请填写类型');
         }
-        if (!toolUrl.length) {
+        if (!url.length) {
+            throw new Error('请填写链接');
+        }
+        if (!title.length) {
             throw new Error('请填写链接');
         }
     } catch (e) {
@@ -336,16 +340,16 @@ router.post('/createTool', checkLogin, (req, res) => {
         return res.redirect('back');
     }
     var tool = {
-        title: title,
-        type: type,
-        url: toolUrl,
-        author: req.session.admin.name,
-        pv: 0,
-        createDate: moment().format('YYYY/M/D'),
-        createTime: moment().format('HH:mm')
-    }
-    console.log('fuck ', tool);
-    //上传工具
+            title: title,
+            type: type,
+            url: url,
+            content: content,
+            author: req.session.admin.name,
+            pv: 0,
+            createDate: moment().format('YYYY/M/D'),
+            createTime: moment().format('HH:mm')
+        }
+        //上传工具
     ToolsModel.createTools(tool).then((message) => {
         req.flash('success', message);
         return res.redirect('back');
@@ -394,10 +398,14 @@ router.post('/updateTool/:id', checkLogin, (req, res) => {
     var title = req.body.toolTitle;
     var url = req.body.toolUrl;
     var type = req.body.toolType;
+    var content = req.body.toolContent;
     var id = req.params.id;
 
     // 校验参数
     try {
+        if (!type.length) {
+            throw new Error('请填写类型');
+        }
         if (!title.length) {
             throw new Error('请填写标题');
         }
@@ -413,6 +421,7 @@ router.post('/updateTool/:id', checkLogin, (req, res) => {
         _id: id,
         title: title,
         type: type,
+        content: content,
         url: url
     }
 

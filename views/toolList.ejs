@@ -2,23 +2,57 @@
 
 
     <div class="col-md-8 col-md-offset-2 content">
-        <div class="panel panel-success">
-          
+        <div class="list-top">
+            <p><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> 全部工具</p>
+        </div>
 
-            <div class="panel-heading">页面生成</div>
+        <div class="panel animated slideInUp panel-success">
+            <div class="panel-heading">插件</div>
             <div class="panel-body">
-               <div class="btn-group" role="group" aria-label="...">
-               <% tools.map(function(tool){%>
-            <a type="button" class="btn btn-default" href="/tool/tool?id=<%=tool._id %>"><%=tool.title %></a>
-          <%});%>
-                    
-                   
+                <div class="btn-group" role="group">
+                    <% tools.map(function(tool){%>
+                        <% if(tool.type=='插件'){%>
+                            <a type="button" class="btn btn-default tool-btn" href="/tool/tool?id=<%=tool._id %>">
+                                <%=tool.title %>
+                            </a>
+                            <%}});%>
+
+
+                </div>
             </div>
         </div>
-    </div>
+        <div class="panel animated slideInUp panel-info">
+            <div class="panel-heading">在线转换</div>
+            <div class="panel-body">
+                <div class="btn-group" role="group">
+                    <% tools.map(function(tool){%>
+                        <% if(tool.type=='在线转换'){%>
+                            <a type="button" class="btn btn-default tool-btn" href="/tool/tool?id=<%=tool._id %>">
+                                <%=tool.title %>
+                            </a>
+                            <%}});%>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="panel animated slideInUp panel-danger">
+            <div class="panel-heading">外链</div>
+            <div class="panel-body">
+                <div class="btn-group" role="group">
+                    <% tools.map(function(tool){%>
+                        <% if(tool.type=='外链'){%>
+                            <a type="button" class="btn btn-default tool-btn" href="<%=tool.url %>" target="_blank">
+                                <%=tool.title %>
+                            </a>
+                            <%}});%>
+
+
+                </div>
+            </div>
+        </div>
 
     </div>
- <%- include('./components/scrollToTop') %>
-<%- include('layouts/footer') %>
-<script src="js/gameList.bundle.js"></script>
-
+    <%- include('./components/scrollToTop') %>
+        <%- include('layouts/footer') %>
+            <script src="js/gameList.bundle.js"></script>

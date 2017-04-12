@@ -2,16 +2,16 @@
 
 
     <div class="col-md-8 col-md-offset-2 content animated slideInDown">
-    <ol class="breadcrumb">
-  <li><a href="<%- type == 'article'?'/artList':'/gameList' %>">列表</a></li>
-  <li class="active">《<%- data.title %>》</li>
-</ol>
+        <ol class="breadcrumb">
+            <li><a href="#" onClick="javascript:history.back(-1);">返回</a></li>
+            <li class="active">《
+                <%- data.title %>》</li>
+        </ol>
 
-   <%- include('./components/'+type,{data:data}) %>
+        <%- include('./components/'+type,{data:data}) %>
 
     </div>
-</div>
- <%- include('./components/scrollToTop') %>
-<%- include('layouts/footer') %>
-<script src="/js/content.bundle.js"></script>
-
+    </div>
+    <%- include('./components/scrollToTop') %>
+        <%- include('layouts/footer') %>
+            <script src="/js/content.bundle.js"></script>

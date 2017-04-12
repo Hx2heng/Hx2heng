@@ -112,10 +112,10 @@ styles:
 
 ### Bootstrap scripts
 scripts:
-  transition: false
+  transition: true
   alert: true
   button: false
-  carousel: false
+  carousel: true
   collapse: true
   dropdown: false
   modal: true
