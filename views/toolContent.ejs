@@ -1,12 +1,12 @@
 <%- include('layouts/header',{styles:['content']}) %>
-    <div class="col-md-8 col-md-offset-2 content animated slideInDown">
+    <div class="col-md-12 col-md-offset content animated slideInDown">
         <ol class="breadcrumb">
             <li><a href="#" onClick="javascript:history.back(-1);">返回</a></li>
             <li class="active">《
                 <%- data.title %>》</li>
         </ol>
 
-        <%- include('./components/'+type,{data:data}) %>
+        <%- include('./linkPage/'+data.url) %>
 
     </div>
     </div>
