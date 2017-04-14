@@ -1,9 +1,10 @@
-# webDemo
- 一个多页应用的架构
+# 本站已开源
 
-作者：黄信政
+开源地址：
+- 纯净版：https://github.com/Hx2heng/MultipleWebDemo
+- 就是这个网站版：https://github.com/Hx2heng/Hx2heng
 
-e-mail：397323988@qq.com
+
 
 ### 特性
 
