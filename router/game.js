@@ -5,7 +5,7 @@ import GamesModel from './models/games'
 let router = express.Router();
 
 
-router.get('/:id', (req, res) => {
+router.get('/', (req, res) => {
     let id = req.query.id;
     if (!id) {
         req.flash('error', '参数错误');

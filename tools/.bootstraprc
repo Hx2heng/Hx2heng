@@ -119,8 +119,8 @@ scripts:
   collapse: true
   dropdown: false
   modal: true
-  tooltip: false
-  popover: false
+  tooltip: true
+  popover: true
   scrollspy: false
   tab: false
   affix: false

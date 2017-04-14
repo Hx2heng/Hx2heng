@@ -5,7 +5,7 @@ import ArticlesModel from './models/articles'
 let router = express.Router();
 
 
-router.get('/:id', (req, res) => {
+router.get('/', (req, res) => {
     let id = req.query.id;
     if (!id) {
         req.flash('error', '参数错误');
@@ -28,12 +28,9 @@ router.get('/docs', (req, res) => {
     let content = req.query.content;
     fs.readFile('public/content/' + content + '.md', (err, data) => {
         if (err) {
-            res.render('content', {
-                title: content,
-                content: marked('`err`')
-            });
+            res.status(404);
         } else {
-            res.render('content', {
+            res.render('staticContent', {
                 title: content,
                 content: marked(data.toString())
             });

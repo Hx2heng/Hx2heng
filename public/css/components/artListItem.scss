@@ -2,7 +2,6 @@
     position: relative;
     display: block;
     background-color: #fff;
-    -webkit-transition: all 0.2s ease-in;
 }
 
 .article-meta {
@@ -36,12 +35,14 @@
 }
 
 .article-header {
+    position: relative;
     display: flex;
     align-items: center;
     border-left: 6px solid $yellow;
     padding: 4px 0px 15px 25px;
     background-color: white;
     transition: all ease 0.3s;
+    border-bottom: 4px solid rgb(238, 238, 238);
 }
 
 .article-header:hover {
@@ -95,7 +96,7 @@
 }
 
 //tags
-label[data-type="javascript"] {
+label[data-type="JavaScript"] {
     background-color: #00d3ff;
 }
 
@@ -130,7 +131,8 @@ label[data-type="game"] {
         margin: 0 -10px;
     }
     .article-header {
-        border-color: #28d7ff;
+        border-left-color: #28d7ff;
+        border-bottom: none;
         padding: 0;
         .article-header-content {
             padding-left: 20px;
@@ -149,6 +151,7 @@ label[data-type="game"] {
 //tools
 .panel {
     margin-bottom: 0;
+    padding-bottom: 15px;
     a.tool-btn {
         margin-bottom: 10px !important;
     }

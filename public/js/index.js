@@ -52,4 +52,28 @@ window.onload = () => {
 
 
     });
+
+    //文章收起展开
+    $('.article-list').on('click', '.content-scrollUp', function() {
+            $(this).parents('.article-header').siblings('.article-entry').toggle();
+            $(this).parents('.article-header').siblings('.article-info').toggle();
+            if ($(this).parents('.article-header').siblings('.article-entry').css('display') == 'none') {
+                $(this).html('<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> 展开');
+                $(window).scrollTop($(this).parents('.article-inner').offset().top - 90);
+            } else {
+                $(this).html('<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span> 收起');
+            }
+        })
+        //文章头部固定
+    $(window).scroll(function() {
+        var scrollTop = $(window).scrollTop();
+        $('.article').each(function() {
+            var toTop = $(this).offset().top;
+            if (scrollTop >= toTop && scrollTop < toTop + $(this).height() && $(this).height() > 500) {
+                $(this).find('.article-header').eq(0).css('top', scrollTop - toTop + 50)
+            } else {
+                $(this).find('.article-header').eq(0).css('top', 0)
+            }
+        });
+    })
 }

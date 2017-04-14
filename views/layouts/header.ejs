@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title><%- locals.title?title+' | ':'' %><%= blog.title %></title>
+    <meta name="author" content="<%= blog.author %>">
+    <title><%- locals.title?title+' | ':'' %><%= blog.title %>
+    </title>
+    <meta name="keywords" content="HTML, DHTML, CSS, JavaScript">
+    <meta name="description" content="<%- locals.title?title:blog.description %>">
     <link rel="stylesheet" href="/css/<%= styles[0] %>.bundle.css">
     <% for(var i=1; i<styles.length-1; i++) {%>
-       <link rel="stylesheet" href="/css/<%= styles[i] %>.css">
-    <% } %>
-  </head>
-  <body>
+        <link rel="stylesheet" href="/css/<%= styles[i] %>.css">
+        <% } %>
+</head>
+
+<body>
     <div class="container-fluid main">
-      <div class="row">
-        <%- include('../components/nav') %>
-       
+        <div class="row">
+            <%- include('../components/nav') %>

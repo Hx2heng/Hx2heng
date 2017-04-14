@@ -323,6 +323,7 @@ router.post('/createTool', checkLogin, (req, res) => {
     var type = req.body.toolType;
     var url = req.body.toolUrl;
     var content = req.body.toolContent;
+    var description = req.body.toolDescription;
     // console.log(gameBgImg);
     // 校验参数
     try {
@@ -344,6 +345,7 @@ router.post('/createTool', checkLogin, (req, res) => {
             type: type,
             url: url,
             content: content,
+            description: description,
             author: req.session.admin.name,
             pv: 0,
             createDate: moment().format('YYYY/M/D'),
@@ -399,6 +401,7 @@ router.post('/updateTool/:id', checkLogin, (req, res) => {
     var url = req.body.toolUrl;
     var type = req.body.toolType;
     var content = req.body.toolContent;
+    var description = req.body.toolDescription;
     var id = req.params.id;
 
     // 校验参数
@@ -422,6 +425,7 @@ router.post('/updateTool/:id', checkLogin, (req, res) => {
         title: title,
         type: type,
         content: content,
+        description: description,
         url: url
     }
 

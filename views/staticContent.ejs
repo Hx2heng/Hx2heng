@@ -1,0 +1,24 @@
+<%- include('layouts/header',{styles:['content']}) %>
+    <div class="col-md-8 col-md-offset-2 content animated slideInDown">
+        <ol class="breadcrumb">
+            <li><a href="#" onClick="javascript:history.back(-1);">返回</a></li>
+            <li class="active">
+                <%- title %>
+            </li>
+        </ol>
+        <div class="col-md-12 article">
+        <div class="row">
+            <%- include('./components/banner') %>
+        </div>
+        <div class="article-inner ">
+            <div class="markdown-body">
+                <%- content %>
+            </div>
+        </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <%- include('./components/scrollToTop') %>
+        <script src="/js/content.bundle.js"></script>
+        <%- include('layouts/footer') %>

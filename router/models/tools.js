@@ -81,6 +81,7 @@ const tools = {
                 tool.title = newTool.title;
                 tool.url = newTool.url;
                 tool.type = newTool.type;
+                tool.description = newTool.description;
                 tool.save((err) => {
                     if (err) {
                         reject(err);

@@ -355,7 +355,7 @@ window.onload = () => {
                     $('.admin-form').fadeIn();
                     $('.admin-form').find('form').attr('action', 'updateTool/' + res._id);
 
-                    insertEditor(res.title, res.type, res.url, res.content);
+                    insertEditor(res.title, res.type, res.url, res.content, res.description);
                 },
                 error: (err) => {
                     console.log(err.responseText);
@@ -389,6 +389,7 @@ window.onload = () => {
             $("input[name='toolType']").removeAttr("checked");
             $('#toolUrl').val('');
             $('#toolContent').val('');
+            $('#toolDescription').val('');
         }
         //文本域控制
         $("input[name='toolType']").on('change', function() {
@@ -400,12 +401,13 @@ window.onload = () => {
             }
         });
         //插入内容到编辑器
-        function insertEditor(title, type, url, content) {
+        function insertEditor(title, type, url, content, description) {
             clearEditor();
             $('#toolTitle').val(title);
             $("input[name='toolType'][value='" + type + "']").attr("checked", true);
             $('#toolUrl').val(url);
             $('#toolContent').val(content);
+            $('#toolDescription').val(description);
             if ($("input[name='toolType']:checked").val() == '插件') {
                 $('.content-editor').show();
             } else {

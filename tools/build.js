@@ -19,6 +19,7 @@ const build = async() => {
             },
         }, null)),
         copyDir('public/content', 'build/public/content'),
+        copyDir('public/linkPage', 'build/public/linkPage'),
         copyDir('views', 'build/views')
     ]);
 
@@ -56,7 +57,7 @@ const build = async() => {
             if (err) {
                 return reject(err);
             }
-            console.log('webpack done!',stats.toString(webpackCfgs[1].stats));
+            console.log('webpack done!', stats.toString(webpackCfgs[1].stats));
             return resolve();
         });
     });

@@ -27,6 +27,7 @@ let appPro = async() => {
         app.locals.blog = {
             title: websideCfg.title,
             description: websideCfg.description,
+            author: websideCfg.author,
         };
         //设置cookies 
         app.use(cookie());
