@@ -261,7 +261,7 @@ window.onload = () => {
             $('#gameContent').val(content);
             $('#gameUrl').val(url);
             $('#gameBgImgText').val(bgImg);
-            $('#pre-gameBgImg').attr('src', bgImg);
+            $('#pre-gameBgImg').attr('src', '../images/' + bgImg);
 
         }
 
@@ -311,9 +311,14 @@ window.onload = () => {
                 reader.onload = function(e) {
                     //e.target.result返回的即是图片的dataURI格式的内容 
                     $('#pre-gameBgImg').attr('src', e.target.result);
-                    $('#gameBgImgText').val(e.target.result);
                 }
             }
+        })
+
+        $('.btn-delBg').on('click', function() {
+            console.log(2);
+            $('#gameBgImg').val('');
+            $('#pre-gameBgImg').attr('src', '');
         })
 
 

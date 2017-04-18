@@ -29,6 +29,8 @@
     &.disabled.active {
         transform: scale(1)
     }
+    background-image:url(../images/share_core_square.jpg);
+    background-size: contain
 }
 
 .socialShare .msb_main:hover {

@@ -38,6 +38,7 @@ window.onload = () => {
                                 item.tags.map(function(tag) {
                                     article.find('.article-tags').append('<label data-type="' + tag + '">' + tag + '</label> ');
                                 });
+                                article.find('.article-tags').append('<a href="javascript:" class="content-scrollUp"><span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span> 收起</a>');
                                 $('.article-list').append(article);
                             })
                             isReqing = false;
@@ -69,8 +70,11 @@ window.onload = () => {
         var scrollTop = $(window).scrollTop();
         $('.article').each(function() {
             var toTop = $(this).offset().top;
-            if (scrollTop >= toTop && scrollTop < toTop + $(this).height() && $(this).height() > 500) {
+            var height = $(this).height();
+            if (scrollTop >= toTop && scrollTop < (toTop + height - $(this).find('.article-header').height() - 70) && height > 500) {
                 $(this).find('.article-header').eq(0).css('top', scrollTop - toTop + 50)
+            } else if (scrollTop >= (toTop + height - $(this).find('.article-header').height() - 70) && height > 500) {
+                $(this).find('.article-header').eq(0).css('top', height - $(this).find('.article-header').height() - 20)
             } else {
                 $(this).find('.article-header').eq(0).css('top', 0)
             }

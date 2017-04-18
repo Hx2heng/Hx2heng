@@ -1,7 +1,8 @@
-<div class="admin-list table-responsive animated slideInDown">
+<div class="admin-list animated slideInDown">
     <div class="col-md-2 col-md-offset-10">
         <button type="button" class="btn btn-success btn-block btn-create">新建</button>
     </div>
+      <div class="col-md-12 table-responsive">
     <table class="table">
         <caption>已发布工具</caption>
         <thead>
@@ -17,10 +18,12 @@
         <tbody>
         </tbody>
     </table>
+    </div>
+    <div class="clearfix"></div>
 </div>
 
 <div class="admin-form">
-    <form method="post" action="createTool">
+    <form method="post" action="createTool" >
         <div class="form-group">
             <label>类型：</label>
             <label class="radio-inline">

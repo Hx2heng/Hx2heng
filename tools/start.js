@@ -22,6 +22,7 @@ let appPro = async() => {
 
         // 设置静态文件目录 访问通过 [host]/...
         app.use(express.static(path.join(__dirname, '../public')));
+        app.use(express.static(path.join(__dirname, '../../uploads')));
 
         //设置网站常量 render优先级:res.render 传入的对象> res.locals 对象 > app.locals 对象
         app.locals.blog = {
@@ -49,18 +50,18 @@ let appPro = async() => {
         });
 
         //限制上传文件大小
-        app.use(bodyParser.json({ 'limit': '1000kb' })); // for parsing application/json
-        app.use(bodyParser.urlencoded({ extended: true, 'limit': '1000kb' })); // for parsing application/x-www-form-urlencoded
-        //app.use(multer()); // for parsing multipart/form-data
+        app.use(bodyParser.json({ 'limit': 1024 * 1024 })); // for parsing application/json
+        app.use(bodyParser.urlencoded({ extended: true, 'limit': 1024 * 1024 })); // for parsing application/x-www-form-urlencoded
+        //app.use(multer({ dest: './public/upload' })); // for parsing multipart/form-data
+
 
         //启动路由
         router(app);
 
 
-        app.use(bodyParser.json());
-
         //启动服务 
         await runServer(app);
+
 
 
         return new Promise(resolve => resolve(app))

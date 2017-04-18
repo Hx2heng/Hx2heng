@@ -5,6 +5,9 @@ import ArticlesModel from './models/articles'
 import GamesModel from './models/games'
 import ToolsModel from './models/tools'
 import moment from 'moment'
+import multer from 'multer'
+import path from 'path'
+
 
 let router = express.Router();
 
@@ -124,7 +127,7 @@ router.post('/createArticle', checkLogin, (req, res) => {
         var content = req.body.articleContent;
 
         var tags = [];
-        console.log(req.body);
+        // console.log(req.body);
         // 校验参数
         try {
             if (!title.length) {
@@ -204,40 +207,64 @@ router.get('/delArtcleTag', checkLogin, (req, res) => {
 })
 
 
-
 //发表游戏页-------------------------------
-router.post('/createGame', checkLogin, (req, res) => {
-    var title = req.body.gameTitle;
-    var content = req.body.gameContent;
-    var url = req.body.gameUrl;
-    var gameBgImg = req.body.gameBgImg;
-    // console.log(gameBgImg);
-    // 校验参数
-    try {
-        if (!title.length) {
-            throw new Error('请填写标题');
-        }
-    } catch (e) {
-        req.flash('error', e.message);
-        return res.redirect('back');
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, path.join(__dirname, '../../uploads/images/'))
+    },
+    filename: function(req, file, cb) {
+        var fileFormat = (file.originalname).split(".");
+        cb(null, file.fieldname + '-' + Date.now() + "." + fileFormat[fileFormat.length - 1]);
     }
-    var game = {
-            title: title,
-            content: content,
-            url: url,
-            author: req.session.admin.name,
-            bgImg: gameBgImg,
-            pv: 0,
-            createDate: moment().format('YYYY/M/D'),
-            createTime: moment().format('HH:mm')
+})
+
+var upload = multer({ storage: storage, limits: { fileSize: 1024 * 1024 } }).single('gameBgImg');
+
+router.post('/createGame', checkLogin, (req, res) => {
+
+    upload(req, res, function(err) {
+        var title = req.body.gameTitle;
+        var content = req.body.gameContent;
+        var url = req.body.gameUrl;
+        var bgImgSrc = '';
+        if (err) {
+            req.flash('error', '图片上传错误');
+            return res.redirect('back');
         }
-        //上传游戏
-    GamesModel.createGames(game).then((message) => {
-        req.flash('success', message);
-        return res.redirect('back');
-    }).catch((err) => {
-        return res.status(403).send(err)
+        try {
+            if (!title.length) {
+                throw new Error('请填写标题');
+            }
+
+        } catch (e) {
+            req.flash('error', e.message);
+            return res.redirect('back');
+        }
+        if (req.file) {
+            req.flash('success', '图片上传成功');
+            bgImgSrc = req.file.filename;
+        }
+        var game = {
+                title: title,
+                content: content,
+                url: url,
+                author: req.session.admin.name,
+                bgImg: bgImgSrc,
+                pv: 0,
+                createDate: moment().format('YYYY/M/D'),
+                createTime: moment().format('HH:mm')
+            }
+            //上传游戏
+        GamesModel.createGames(game).then((message) => {
+            req.flash('success', message);
+            return res.redirect('back');
+        }).catch((err) => {
+            return res.status(403).send(err)
+        })
     })
+
+    // console.log(gameBgImg);
+
 
 })
 
@@ -277,37 +304,44 @@ router.get('/deleteGameById', checkLogin, (req, res) => {
 
 //根据id修改某个游戏
 router.post('/updateGame/:id', checkLogin, (req, res) => {
-    var title = req.body.gameTitle;
-    var content = req.body.gameContent;
-    var url = req.body.gameUrl;
-    var gameBgImg = req.body.gameBgImg;
-    var id = req.params.id;
 
-    // 校验参数
-    try {
-        if (!title.length) {
-            throw new Error('请填写标题');
+    upload(req, res, function(err) {
+        var title = req.body.gameTitle;
+        var content = req.body.gameContent;
+        var url = req.body.gameUrl;
+        var id = req.params.id;
+        var bgImgSrc = '';
+        // 校验参数
+        try {
+            if (!title.length) {
+                throw new Error('请填写标题');
+            }
+        } catch (e) {
+            req.flash('error', e.message);
+            return res.redirect('back');
         }
-    } catch (e) {
-        req.flash('error', e.message);
-        return res.redirect('back');
-    }
+        if (req.file) {
+            req.flash('success', '图片上传成功');
+            bgImgSrc = req.file.filename;
+        }
 
-    var newGame = {
-        _id: id,
-        title: title,
-        content: content,
-        bgImg: gameBgImg,
-        url: url
-    }
+        var newGame = {
+            _id: id,
+            title: title,
+            content: content,
+            bgImg: bgImgSrc,
+            url: url
+        }
 
-    GamesModel.updateOneGame(newGame).then((message) => {
-        req.flash('success', message);
-        return res.redirect('back');
-    }).catch((err) => {
-        return res.status(403).send(err)
+        GamesModel.updateOneGame(newGame).then((message) => {
+            req.flash('success', message);
+            return res.redirect('back');
+        }).catch((err) => {
+            return res.status(403).send(err)
 
+        })
     })
+
 
 
 

@@ -5,6 +5,7 @@ import autoprefixer from 'autoprefixer'
 import extend from 'extend'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import cssnano from 'cssnano'
+import CompressionWebpackPlugin from 'compression-webpack-plugin'
 
 const isDebug = process.argv[1].endsWith('dev');
 
@@ -61,7 +62,7 @@ let config = {
             }
         ]
     },
-    devtool: isDebug ? 'cheap-module-eval-source-map' : 'cheap-module-eval-source-map',
+    devtool: isDebug ? 'cheap-module-eval-source-map' : '',
     stats: {
         assets: true,
         cached: false,
@@ -82,9 +83,19 @@ let config = {
         }),
         new ExtractTextPlugin({ filename: isDebug ? 'css/[name].bundle.css' : 'css/[name].bundle.css?[hash]-[chunkhash]-[contenthash]-[name]' }),
         new webpack.optimize.UglifyJsPlugin({
+            comments: false,
             compress: {
                 warnings: isDebug ? true : false
             }
+        }),
+        new CompressionWebpackPlugin({ //gzip 压缩
+            asset: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: new RegExp(
+                '\\.(js|css)$' //压缩 js 与 css
+            ),
+            threshold: 10240,
+            minRatio: 0.8
         })
     ]
 }

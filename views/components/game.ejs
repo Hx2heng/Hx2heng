@@ -38,50 +38,12 @@
         </div>
          <div class="article-info article-info-index">
             <div class="socialShare"></div>
-            <!--PC和WAP自适应版-->
-            <% if(isConcrete){%>
-                <div id="SOHUCS" sid="<%- data._id %>"></div>
-                <script type="text/javascript">
-                    (function() {
-                        var appid = 'cysWGNiO1';
-                        var conf = 'prod_f7871a7325e81143accd91a852265fcd';
-                        var width = window.innerWidth || document.documentElement.clientWidth;
-                        if (width < 960) {
-                            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
-                        } else {
-                            var loadJs = function(d, a) {
-                                var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
-                                var b = document.createElement("script");
-                                b.setAttribute("type", "text/javascript");
-                                b.setAttribute("charset", "UTF-8");
-                                b.setAttribute("src", d);
-                                if (typeof a === "function") {
-                                    if (window.attachEvent) {
-                                        b.onreadystatechange = function() {
-                                            var e = b.readyState;
-                                            if (e === "loaded" || e === "complete") {
-                                                b.onreadystatechange = null;
-                                                a()
-                                            }
-                                        }
-                                    } else {
-                                        b.onload = a
-                                    }
-                                }
-                                c.appendChild(b)
-                            };
-                            loadJs("http://changyan.sohu.com/upload/changyan.js", function() {
-                                window.changyan.api.config({
-                                    appid: appid,
-                                    conf: conf
-                                })
-                            });
-                        }
-                    })();
-                </script>
-
-                <%}%>
-                    <div class="clearfix"></div>
+                <div class="clearfix"></div>
         </div>
     </div>
 </article>
+<!--PC和WAP自适应版-->
+<% if(isConcrete){%>
+    <iframe id="cy-frame" name="cyFrame" width="100%" scrolling="no" frameborder="0" src="/comment?sid=<%- data._id %>" style="background-color:white;margin-top:-10px; padding: 0 30px;border-top:1px dashed #e5e5e5"></iframe>
+    <%}%>
+        <div class="clearfix"></div>

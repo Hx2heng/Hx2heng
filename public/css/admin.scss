@@ -2,11 +2,15 @@
 @import './lib/animated.css';
 @import './components/banner.scss';
 @import './components/nav.scss';
+@import './components/footer.scss';
 .admin-content {
     .admin-form,
     .admin-list {
         background-color: white;
         padding: 20px 10px;
+        button {
+            margin-bottom: 10px;
+        }
     }
     .admin-list {
         table {

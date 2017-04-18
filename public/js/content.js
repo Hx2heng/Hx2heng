@@ -2,6 +2,7 @@ import '../css/content.scss';
 import './components/nav';
 import './components/share';
 import './components/scrollToTop';
+import './components/comment';
 
 window.onload = () => {
     $(".socialShare").socialShare({
