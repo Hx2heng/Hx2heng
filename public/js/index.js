@@ -4,7 +4,7 @@ import './components/scrollToTop';
 window.onload = () => {
     //滚动加载
     var skip = 5,
-        limit = 5,
+        limit = 1,
         isReqing = false;
     $(window).scroll(function() {
         var scrollTop = $(this).scrollTop();
@@ -19,7 +19,7 @@ window.onload = () => {
                     type: 'get',
                     ifModified: true,
                     success: function(res) {
-                        skip += 5;
+                        skip += limit;
                         if (!res || res.length == 0) {
                             console.log('没有更多内容了');
                             $('.article-list').append('<div class="alert alert-warning alert-dismissible fade in" role="alert">' +

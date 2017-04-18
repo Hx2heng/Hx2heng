@@ -1,9 +1,10 @@
-function changeFrameHeight() {
-    var ifm = document.getElementById("cy-frame");
-    if (!ifm) return;
-    ifm.height = document.documentElement.clientHeight;
+function reinitIframe() {
+    var iframe = document.getElementById("cy-frame");
+    try {
+        var bHeight = iframe.contentWindow.document.body.scrollHeight;
+        var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+        var height = Math.max(bHeight, dHeight);
+        iframe.height = height;
+    } catch (ex) {}
 }
-changeFrameHeight();
-window.onresize = function() {
-    changeFrameHeight();
-}
+setInterval(reinitIframe, 200); //定时去检查iframe的高度,这样保证时时都是自动高了

@@ -74,6 +74,9 @@
         }
         
         @media (max-width: 992px) {
+            .article-list {
+                padding: 0;
+            }
             .game-list {
                 display: none
             }
