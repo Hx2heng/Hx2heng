@@ -16,7 +16,8 @@
                         var appid = 'cysWGNiO1';
                         var conf = 'prod_f7871a7325e81143accd91a852265fcd';
                         var width = window.innerWidth || document.documentElement.clientWidth;
-                        if (width < 960) {
+                        console.log(width)
+                        if (width <592) {
                             window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
                         } else {
                             var loadJs = function(d, a) {
