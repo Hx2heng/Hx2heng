@@ -30,10 +30,11 @@ window.onload = () => {
                         } else {
                             res.map(function(item) {
                                 var article = $('.article-list .article').eq(0).clone();
-                                article.find('.article-title').attr('href', '/article/article?id=' + item._id).html(item.title);
+                                article.find('.article-title').attr('href', '/article?id=' + item._id).html(item.title);
                                 article.find('.article-author').html('From:' + item.author);
                                 article.find('.markdown-body').html(item.content);
                                 article.find('.article-date').html(item.createDate + ' ' + item.createTime);
+                                article.find('.article-entry').css('display', 'block');
                                 article.find('.article-tags').empty();
                                 item.tags.map(function(tag) {
                                     article.find('.article-tags').append('<label data-type="' + tag + '">' + tag + '</label> ');

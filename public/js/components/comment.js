@@ -3,7 +3,8 @@ function reinitIframe() {
     try {
         var bHeight = iframe.contentWindow.document.body.scrollHeight;
         var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
-        var height = Math.max(bHeight, dHeight);
+        var height = Math.max(bHeight, dHeight, 500);
+
         iframe.height = height;
     } catch (ex) {}
 }

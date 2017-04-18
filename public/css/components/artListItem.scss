@@ -45,10 +45,12 @@
     border-bottom: 4px solid rgb(238, 238, 238);
 }
 
-.article-header:hover {
-    box-shadow: 0 2px 20px #808080;
-    margin-bottom: 20px;
-    transform: scale(1.01)
+@media(min-width:992px) {
+    .article-header:hover {
+        box-shadow: 0 2px 20px #808080;
+        margin-bottom: 20px;
+        transform: scale(1.01)
+    }
 }
 
 .article-header-content {
