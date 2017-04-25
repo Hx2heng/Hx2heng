@@ -46,7 +46,6 @@
             }
             .social {
                 display: flex;
-                margin-right: 15px;
                 margin-top: 10px;
                 text-align: center;
                 justify-content: center;
@@ -83,6 +82,7 @@
             .information {
                 position: static;
                 padding-bottom: 0;
+                overflow-y: visible;
                 .admin-information {
                     .admin-pic {
                         width: 100px;

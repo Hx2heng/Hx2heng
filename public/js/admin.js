@@ -3,6 +3,10 @@ import '../css/lib/bootstrap-markdown.min.css';
 import './components/nav';
 import './lib/bootstrap-markdown.js';
 window.onload = () => {
+    //提示框 alert
+    if ($.trim($('.alert .alert-content').html())) {
+        $('.alert').fadeIn();
+    }
     //  文章管理页
     if ($('.admin-article').get(0)) {
         //获取文章列表到dom

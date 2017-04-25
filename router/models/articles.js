@@ -7,10 +7,10 @@ const articles = {
             var oneArticle = new ArticleModel(article);
             oneArticle.save((err) => {
                 if (err) {
-                    reject(err);
+                    reject('上传文章失败');
                     return;
                 }
-                resolve('插入成功');
+                resolve('上传文章成功');
             });
         })
     },
@@ -23,7 +23,7 @@ const articles = {
             }
             ArticleModel.find(query, null, { sort: { '_id': -1 } }, (err, articles) => {
                 if (err) {
-                    reject(err);
+                    reject('找不到文章');
                     return;
                 }
                 resolve(articles)
@@ -36,12 +36,12 @@ const articles = {
     findArticleById: (id) => {
         return new Promise((resolve, reject) => {
             if (!id) {
-                reject('文章已被删除');
+                reject('找不到文章,文章可能已被删除');
                 return;
             }
             ArticleModel.findById(id, (err, article) => {
                 if (err) {
-                    reject('找不到文章');
+                    reject('找不到文章,文章可能已被删除');
                     return;
                 }
                 resolve(article)
@@ -55,12 +55,12 @@ const articles = {
         return new Promise((resolve, reject) => {
             let query = {};
             if (!id) {
-                reject(new Error('缺少_id'));
+                reject('找不到文章（参数id错误）');
                 return;
             }
             ArticleModel.remove({ _id: id }, (err) => {
                 if (err) {
-                    reject(err);
+                    reject('删除文章失败');
                     return;
                 }
                 resolve('删除成功！')
@@ -73,11 +73,11 @@ const articles = {
     updateOneArticle: (newArticle) => {
         return new Promise((resolve, reject) => {
             if (!newArticle._id) {
-                reject(new Error('缺少_id'));
+                reject('找不到文章（参数id错误）');
             }
             ArticleModel.findById(newArticle._id, (err, article) => {
                 if (err) {
-                    reject(err);
+                    reject('找不到文章');
                     return;
                 }
                 article.title = newArticle.title;
@@ -85,7 +85,7 @@ const articles = {
                 article.tags = newArticle.tags;
                 article.save((err) => {
                     if (err) {
-                        reject(err);
+                        reject('更新文章失败');
                         return;
                     }
                     resolve('更新文章成功');
@@ -97,7 +97,7 @@ const articles = {
     findAllArticlesByTags: (type, limit = null, skip = 0) => {
         return new Promise((resolve, reject) => {
             if (!type) {
-                reject('找不到标签');
+                reject('找不到标签（参数"type"错误）');
                 return;
             }
             let query = {
@@ -105,7 +105,7 @@ const articles = {
             };
             ArticleModel.find(query, null, { sort: { '_id': -1 } }, (err, articles) => {
                 if (err) {
-                    reject(err);
+                    reject('找不到标签');
                     return;
                 }
                 resolve(articles)

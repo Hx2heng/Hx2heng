@@ -7,10 +7,10 @@ const tools = {
             var oneTool = new ToolModel(tool);
             oneTool.save((err) => {
                 if (err) {
-                    reject(err);
+                    reject('上传工具失败');
                     return;
                 }
-                resolve('插入成功');
+                resolve('上传工具成功');
             });
         })
     },
@@ -23,7 +23,7 @@ const tools = {
             }
             ToolModel.find(query, null, { sort: { '_id': -1 } }, (err, tools) => {
                 if (err) {
-                    reject(err);
+                    reject('找不到工具');
                     return;
                 }
                 resolve(tools)
@@ -53,7 +53,7 @@ const tools = {
         return new Promise((resolve, reject) => {
             let query = {};
             if (!id) {
-                reject(new Error('缺少_id'));
+                reject('找不到工具');
                 return;
             }
             ToolModel.remove({ _id: id }, (err) => {
@@ -71,11 +71,11 @@ const tools = {
     updateOneTool: (newTool) => {
         return new Promise((resolve, reject) => {
             if (!newTool._id) {
-                reject(new Error('缺少_id'));
+                reject('找不到工具（id错误）');
             }
             ToolModel.findById(newTool._id, (err, tool) => {
                 if (err) {
-                    reject(err);
+                    reject('找不到工具');
                     return;
                 }
                 tool.title = newTool.title;
@@ -84,7 +84,7 @@ const tools = {
                 tool.description = newTool.description;
                 tool.save((err) => {
                     if (err) {
-                        reject(err);
+                        reject('工具更新失败');
                         return;
                     }
                     resolve('更新工具成功');

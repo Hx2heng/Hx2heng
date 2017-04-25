@@ -37,7 +37,8 @@ router.get('/', (req, res) => {
         }
 
     }).catch((err) => {
-        return res.status(404).end(err);
+        req.flash('error', err);
+        return res.status(404).render('404');
     });
 
 })

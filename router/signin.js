@@ -19,6 +19,7 @@ router.get('/', (req, res) => {
             defaultNameValue = req.cookies.defaultInputValue.defaultNameValue;
             defaultPasswordValue = req.cookies.defaultInputValue.defaultPasswordValue;
         }
+        req.flash('error', '请登录');
         res.render('signin', { defaultNameValue: defaultNameValue, defaultPasswordValue: defaultPasswordValue })
     }
 })

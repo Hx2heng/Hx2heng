@@ -34,7 +34,10 @@ router.get('/admin-tool', checkLogin, (req, res) => {
 router.get('/getAllArticles', checkLogin, (req, res) => {
     ArticlesModel.findAllArticles(req.session.admin.name).then((articles) => {
         return res.json(articles);
-    });
+    }).catch((err) => {
+        req.flash('error', err);
+        return res.redirect('back');
+    });;
 
 })
 
@@ -49,7 +52,8 @@ router.get('/getArticleById', checkLogin, (req, res) => {
 
             return res.json(article);
         }).catch((err) => {
-            return res.status(404).end(err);
+            req.flash('error', err);
+            return res.redirect('back');
         });
     })
     //根据id删除某篇文章
@@ -63,7 +67,8 @@ router.get('/deleteArticleById', checkLogin, (req, res) => {
             req.flash('success', message);
             return res.send(message);
         }).catch((err) => {
-            return res.status(403).send(err)
+            req.flash('error', err);
+            return res.redirect('back');
         });
     })
     //根据id修改某篇文章
@@ -109,7 +114,8 @@ router.post('/updateArticle/:id', checkLogin, (req, res) => {
             req.flash('success', message);
             return res.redirect('back');
         }).catch((err) => {
-            return res.status(403).send(err)
+            req.flash('error', err);
+            return res.redirect('back');
         });
 
     }).catch((err) => {
@@ -163,7 +169,8 @@ router.post('/createArticle', checkLogin, (req, res) => {
                 req.flash('success', message);
                 return res.redirect('back');
             }).catch((err) => {
-                return res.status(403).send(err)
+                req.flash('error', err);
+                return res.redirect('back');
             })
 
         }).catch((err) => {
@@ -181,7 +188,8 @@ router.get('/getAllArticleTags', checkLogin, (req, res) => {
         AdminsModel.findAllArticleTagsByAdmin(req.session.admin.name).then((articleTags) => {
             return res.send(articleTags);
         }).catch((err) => {
-            return res.status(404).send(err)
+            req.flash('error', err);
+            return res.redirect('back');
         })
 
     })
@@ -191,7 +199,8 @@ router.get('/addArtcleTag', checkLogin, (req, res) => {
         AdminsModel.addArtcleTagsByAdmin(req.session.admin.name, newTagName).then((message) => {
             return res.send(message);
         }).catch((err) => {
-            return res.status(403).send(err)
+            req.flash('error', err);
+            return res.redirect('back');
         });
 
     })
@@ -201,7 +210,8 @@ router.get('/delArtcleTag', checkLogin, (req, res) => {
     AdminsModel.delArtcleTagsByAdmin(req.session.admin.name, tags).then((message) => {
         return res.send(message);
     }).catch((err) => {
-        return res.status(403).send(err)
+        req.flash('error', err);
+        return res.redirect('back');
     });
 
 })
@@ -259,7 +269,8 @@ router.post('/createGame', checkLogin, (req, res) => {
             req.flash('success', message);
             return res.redirect('back');
         }).catch((err) => {
-            return res.status(403).send(err)
+            req.flash('error', err);
+            return res.redirect('back');
         })
     })
 
@@ -274,7 +285,7 @@ router.get('/getAllGames', checkLogin, (req, res) => {
             return res.json(games);
         });
     })
-    //根据id查询某个文章
+    //根据id查询某个游戏
 router.get('/getGameById', checkLogin, (req, res) => {
         let id = req.query.id;
         if (!id) {
@@ -284,10 +295,11 @@ router.get('/getGameById', checkLogin, (req, res) => {
         GamesModel.findGameById(id).then((game) => {
             return res.json(game);
         }).catch((err) => {
-            return res.status(404).end(err);
+            req.flash('error', err);
+            return res.redirect('back');
         });
     })
-    //根据id删除某个文章
+    //根据id删除某个游戏
 router.get('/deleteGameById', checkLogin, (req, res) => {
     let id = req.query.id;
     if (!id) {
@@ -298,7 +310,8 @@ router.get('/deleteGameById', checkLogin, (req, res) => {
         req.flash('success', message);
         return res.send(message);
     }).catch((err) => {
-        return res.status(403).send(err)
+        req.flash('error', err);
+        return res.redirect('back');
     });
 })
 
@@ -311,6 +324,7 @@ router.post('/updateGame/:id', checkLogin, (req, res) => {
         var url = req.body.gameUrl;
         var id = req.params.id;
         var bgImgSrc = '';
+        console.log('update:', id);
         // 校验参数
         try {
             if (!title.length) {
@@ -337,7 +351,8 @@ router.post('/updateGame/:id', checkLogin, (req, res) => {
             req.flash('success', message);
             return res.redirect('back');
         }).catch((err) => {
-            return res.status(403).send(err)
+            req.flash('error', err);
+            return res.redirect('back');
 
         })
     })
@@ -368,7 +383,7 @@ router.post('/createTool', checkLogin, (req, res) => {
             throw new Error('请填写链接');
         }
         if (!title.length) {
-            throw new Error('请填写链接');
+            throw new Error('请填写名字');
         }
     } catch (e) {
         req.flash('error', e.message);
@@ -414,7 +429,7 @@ router.get('/getToolById', checkLogin, (req, res) => {
             return res.status(404).end(err);
         });
     })
-    //根据id删除某个文章
+    //根据id删除某个工具
 router.get('/deleteToolById', checkLogin, (req, res) => {
     let id = req.query.id;
     if (!id) {

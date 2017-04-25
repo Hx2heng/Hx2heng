@@ -7,10 +7,10 @@ const games = {
             var oneGame = new GameModel(game);
             oneGame.save((err) => {
                 if (err) {
-                    reject(err);
+                    reject('上传游戏失败');
                     return;
                 }
-                resolve('插入成功');
+                resolve('上传游戏成功');
             });
         })
     },
@@ -23,7 +23,7 @@ const games = {
             }
             GameModel.find(query, null, { sort: { '_id': -1 } }, (err, games) => {
                 if (err) {
-                    reject(err);
+                    reject('找不到游戏');
                     return;
                 }
                 resolve(games)
@@ -55,7 +55,7 @@ const games = {
         return new Promise((resolve, reject) => {
             let query = {};
             if (!id) {
-                reject(new Error('缺少_id'));
+                reject('找不到游戏（参数id错误）');
                 return;
             }
             GameModel.remove({ _id: id }, (err) => {
@@ -73,11 +73,11 @@ const games = {
     updateOneGame: (newGame) => {
         return new Promise((resolve, reject) => {
             if (!newGame._id) {
-                reject(new Error('缺少_id'));
+                reject('找不到游戏（参数id错误）');
             }
             GameModel.findById(newGame._id, (err, game) => {
                 if (err) {
-                    reject(err);
+                    reject('找不到游戏');
                     return;
                 }
                 game.title = newGame.title;
@@ -86,7 +86,7 @@ const games = {
                 game.bgImg = newGame.bgImg;
                 game.save((err) => {
                     if (err) {
-                        reject(err);
+                        reject('修改游戏失败');
                         return;
                     }
                     resolve('更新游戏成功');

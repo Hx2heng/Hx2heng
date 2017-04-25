@@ -6,7 +6,7 @@ const admins = {
         return new Promise((resolve, reject) => {
             AdminModel.findOne({ name: name }, (err, admin) => {
                 if (err) {
-                    reject(err)
+                    reject('获取当前用户出错')
                 } else {
                     resolve(admin)
                 }
@@ -22,7 +22,7 @@ const admins = {
             }
             AdminModel.find(query, 'articleTags', (err, models) => {
                 if (err) {
-                    reject(err);
+                    reject('获取文章出错');
                     return;
                 }
                 if (models.length == 1) {
@@ -42,12 +42,12 @@ const admins = {
     addArtcleTagsByAdmin: (admin, newTag) => {
         return new Promise((resolve, reject) => {
             if (!admin || !newTag) {
-                reject(new Error('参数错误'));
+                reject('添加失败，缺少必要参数');
                 return;
             }
             AdminModel.findOne({ name: admin }, (err, models) => {
                 if (err) {
-                    reject(err);
+                    reject('找不到文章');
                     return;
                 }
                 //判断是否存在标签
@@ -63,7 +63,7 @@ const admins = {
                     models.articleTags.push(newTag);
                     models.save((err) => {
                         if (err) {
-                            reject(err);
+                            reject('添加标签失败');
                             return;
                         }
                         resolve('添加标签成功');
@@ -77,13 +77,12 @@ const admins = {
     delArtcleTagsByAdmin: (admin, tags) => {
         return new Promise((resolve, reject) => {
             if (!admin || !tags) {
-                reject(new Error('参数错误'));
+                reject('添加失败，缺少必要参数');
                 return;
             }
             AdminModel.update({ name: admin }, { '$pullAll': { 'articleTags': tags } }, (err) => {
                 if (err) {
-                    console.log(err);
-                    reject(err);
+                    reject('删除标签失败');
                     return;
                 }
                 resolve('删除标签成功！');

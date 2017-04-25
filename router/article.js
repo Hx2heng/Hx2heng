@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
         req.flash('error', '参数错误');
         return res.redirect('back');
     }
+
     ArticlesModel.findArticleById(id).then((article) => {
         article.content = marked(article.content);
         res.render('content', {
@@ -20,7 +21,8 @@ router.get('/', (req, res) => {
             isConcrete: true
         })
     }).catch((err) => {
-        return res.status(404).end(err);
+        req.flash('error', err);
+        return res.status(404).render('404');
     });
 
 })

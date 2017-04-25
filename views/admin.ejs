@@ -1,59 +1,70 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title><%= blog.title %></title>
+    <title>
+        <%= blog.title %>
+    </title>
     <link rel="stylesheet" href="/css/admin.bundle.css">
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="container-fluid main">
-      <div class="row">
-<nav class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <div class="row">
+            <nav class="navbar navbar-fixed-top navbar-inverse">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand animated slideInLeft" href="/">Hx2heng</a>
-    </div>
+                        <a class="navbar-brand animated slideInLeft" href="/">Hx2heng</a>
+                    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="/">首页 <span class="sr-only">(current)</span></a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <p class="navbar-text"><%= admin %></p>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-   <div class="col-md-12 content">
-         <div class="col-md-2 admin-side">
-            <div class="list-group">
-  <a href="/admin/admin-article" class="list-group-item <%- type=='admin-article'?'active':'' %>">
-   文章
-  </a>
-  <a href="/admin/admin-tool" class="list-group-item <%- type=='admin-tool'?'active':'' %>">工具</a>
-  <a href="/admin/admin-game" class="list-group-item <%- type=='admin-game'?'active':'' %>">游戏</a>
-  <a href="/admin/admin-setting" class="list-group-item <%- type=='admin-setting'?'active':'' %>">设置</a>
-  <a href="/admin/admin-setting" class="list-group-item <%- type=='admin-setting'?'active':'' %>">退出登录</a>
-</div>
-         </div>
-         <div class="col-md-10 admin-content <%- type %>">
-            <p class="text-center">
-                                <%= success %>
-                                    <%= error %>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/">首页 <span class="sr-only">(current)</span></a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <p class="navbar-text">
+                                <%= admin %>
                             </p>
-            <%- include('./components/'+type) %>
-         </div>
-    </div>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+            <div class="col-md-12 content">
+                <div class="col-md-2 admin-side">
+                    <div class="list-group">
+                        <a href="/admin/admin-article" class="list-group-item <%- type=='admin-article'?'active':'' %>">文章</a>
+                        <a href="/admin/admin-tool" class="list-group-item <%- type=='admin-tool'?'active':'' %>">工具</a>
+                        <a href="/admin/admin-game" class="list-group-item <%- type=='admin-game'?'active':'' %>">游戏</a>
+                        <a href="/admin/admin-setting" class="list-group-item <%- type=='admin-setting'?'active':'' %>">设置</a>
+                        <a href="/admin/admin-setting" class="list-group-item <%- type=='admin-setting'?'active':'' %>">退出登录</a>
+                    </div>
+                    <div class="alert alert-warning alert-dismissible fade in" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <div class="alert-content">
+                            <%= success %>
+                                <%= error %>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10 admin-content <%- type %>">
 
-<%- include('layouts/footer') %>
-<script src="/js/admin.bundle.js"></script>
+                    <%- include('./components/'+type) %>
+                </div>
+            </div>
 
+            <%- include('layouts/footer') %>
+                <script src="/js/admin.bundle.js"></script>
